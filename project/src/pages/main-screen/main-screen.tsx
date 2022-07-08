@@ -145,7 +145,7 @@ function MainScreen ({name, genre, releaseDate} : MainScreenProps): JSX.Element 
           </ul>
 
           <div className="catalog__films-list">
-            { [...Array(Setting.FILM_COUNT)].map((item, index) => <SingleFilmCard key={index} /> ) }
+            { [...Array(Setting.FILM_COUNT)].map(() => <SingleFilmCard key={Math.floor(Math.random() * 100)} /> ) }
           </div>
 
           <div className="catalog__more">
