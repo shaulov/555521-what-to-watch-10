@@ -6,3 +6,9 @@ export enum AppRoute {
   Player = '/player/:id',
   Review = 'review',
 }
+
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
