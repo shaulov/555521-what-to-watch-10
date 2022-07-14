@@ -1,4 +1,4 @@
-function FilScreen (): JSX.Element {
+function FilmScreen (): JSX.Element {
   return (
     <>
       <div className="visually-hidden">
@@ -194,4 +194,4 @@ function FilScreen (): JSX.Element {
   );
 }
 
-export default FilScreen;
+export default FilmScreen;
