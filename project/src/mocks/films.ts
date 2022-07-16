@@ -4,7 +4,7 @@ export const films : Film[] = [
   {
     id: '100233',
     name: 'The Grand Budapest Hotel',
-    poster: '',
+    poster: 'img/the-grand-budapest-hotel-poster.jpg',
     genre: ['drama'],
     releaseDate: '2014',
     rating: 8.9,
@@ -17,7 +17,7 @@ export const films : Film[] = [
   {
     id: '103233',
     name: 'The Grand Budapest Hotel',
-    poster: '',
+    poster: 'img/snatch.jpg',
     genre: ['drama'],
     releaseDate: '2014',
     rating: 8.2,
@@ -30,7 +30,7 @@ export const films : Film[] = [
   {
     id: '113233',
     name: 'The Grand Budapest Hotel',
-    poster: '',
+    poster: 'img/shutter-island.jpg',
     genre: ['drama'],
     releaseDate: '2014',
     rating: 8.1,
@@ -43,7 +43,7 @@ export const films : Film[] = [
   {
     id: '103293',
     name: 'The Grand Budapest Hotel',
-    poster: '',
+    poster: 'img/midnight-special.jpg',
     genre: ['drama'],
     releaseDate: '2014',
     rating: 7.4,
@@ -56,7 +56,7 @@ export const films : Film[] = [
   {
     id: '109733',
     name: 'The Grand Budapest Hotel',
-    poster: '',
+    poster: 'img/revenant.jpg',
     genre: ['drama'],
     releaseDate: '2014',
     rating: 8.8,
@@ -69,7 +69,7 @@ export const films : Film[] = [
   {
     id: '155233',
     name: 'The Grand Budapest Hotel',
-    poster: '',
+    poster: 'img/mindhunter.jpg',
     genre: ['drama'],
     releaseDate: '2014',
     rating: 8.5,
@@ -82,7 +82,7 @@ export const films : Film[] = [
   {
     id: '103993',
     name: 'The Grand Budapest Hotel',
-    poster: '',
+    poster: 'img/midnight-special.jpg',
     genre: ['drama'],
     releaseDate: '2014',
     rating: 5.9,
@@ -95,7 +95,7 @@ export const films : Film[] = [
   {
     id: '166733',
     name: 'The Grand Budapest Hotel',
-    poster: '',
+    poster: 'img/macbeth.jpg',
     genre: ['drama'],
     releaseDate: '2014',
     rating: 7.9,

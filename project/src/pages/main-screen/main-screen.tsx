@@ -1,16 +1,19 @@
-import SingleFilmCard from '../../components/single-film-card/single-film-card';
+import FilmsList from '../../components/films-list/films-list';
+
+import { Film } from '../../types/film';
 
 type MainScreenProps = {
   name: string;
   genre: string;
   releaseDate: string;
+  films: Film[];
 }
 
 const Setting = {
   FILM_COUNT: 20,
 };
 
-function MainScreen ({name, genre, releaseDate} : MainScreenProps): JSX.Element {
+function MainScreen ({name, genre, releaseDate, films} : MainScreenProps): JSX.Element {
 
   return (
     <>
@@ -144,9 +147,10 @@ function MainScreen ({name, genre, releaseDate} : MainScreenProps): JSX.Element 
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            { [...Array(Setting.FILM_COUNT)].map(() => <SingleFilmCard key={Math.floor(Math.random() * 100)} /> ) }
-          </div>
+          <FilmsList
+            filmCount={Setting.FILM_COUNT}
+            films={films}
+          />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
