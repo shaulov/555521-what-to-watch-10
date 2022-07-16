@@ -11,13 +11,20 @@ import Screen404 from '../../pages/404-screen/404-screen';
 
 import PrivateRoute from '../private-root/private-root';
 
+import { Film, FilmReview } from '../../types/film';
+
+type AppScreenProps = {
+  films: Film[],
+  reviews: FilmReview[],
+}
+
 const randomFilm = {
   name: 'The Grand Budapest Hotel',
   genre: 'Drama',
   releaseDate: '2014',
 };
 
-function App(): JSX.Element {
+function App({films, reviews}: AppScreenProps): JSX.Element {
   const { name, genre, releaseDate } = randomFilm;
 
   return (
@@ -25,7 +32,7 @@ function App(): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainScreen name={name} genre={genre} releaseDate={releaseDate} />}
+          element={<MainScreen name={name} genre={genre} releaseDate={releaseDate} films={films} />}
         />
         <Route
           path={AppRoute.Film}
