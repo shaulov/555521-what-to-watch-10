@@ -9,10 +9,6 @@ type MainScreenProps = {
   films: Film[];
 }
 
-const Setting = {
-  FILM_COUNT: 20,
-};
-
 function MainScreen ({name, genre, releaseDate, films} : MainScreenProps): JSX.Element {
 
   return (
@@ -148,7 +144,6 @@ function MainScreen ({name, genre, releaseDate, films} : MainScreenProps): JSX.E
           </ul>
 
           <FilmsList
-            filmCount={Setting.FILM_COUNT}
             films={films}
           />
 
