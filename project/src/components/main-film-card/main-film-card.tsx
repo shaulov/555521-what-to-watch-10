@@ -1,4 +1,5 @@
-import PageHeader from '../page-header/page-header';
+import Logo from '../../components/logo/logo';
+import UserBlock from '../../components/user-block/user-block';
 
 import { Film } from '../../types/film';
 
@@ -15,7 +16,11 @@ function MainFilmCard({film}: MainFilmCardProps) : JSX.Element {
 
       <h1 className="visually-hidden">WTW</h1>
 
-      <PageHeader />
+      <header className="page-header film-card__head">
+        <Logo />
+
+        <UserBlock />
+      </header>
 
       <div className="film-card__wrap">
         <div className="film-card__info">
