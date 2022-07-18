@@ -1,5 +1,9 @@
+import { Link } from 'react-router-dom';
+
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
+
+import { AppRoute } from '../../const';
 
 import { Film } from '../../types/film';
 
@@ -7,8 +11,8 @@ type MyListScreenProps = {
   film: Film,
 }
 
-function ReviewScreen ({film}: MyListScreenProps): JSX.Element {
-  const { name, poster, background } = film;
+function AddReviewScreen ({film}: MyListScreenProps): JSX.Element {
+  const { id, name, poster, background } = film;
 
   return (
     <>
@@ -50,12 +54,12 @@ function ReviewScreen ({film}: MyListScreenProps): JSX.Element {
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header">
-            <Logo />
+            <Logo light={false} />
 
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <a href="film-page.html" className="breadcrumbs__link">{name}</a>
+                  <Link to={`${AppRoute.Film}/${id}`} className="breadcrumbs__link">{name}</Link>
                 </li>
                 <li className="breadcrumbs__item">
                   <a className="breadcrumbs__link">Add review</a>
@@ -122,4 +126,4 @@ function ReviewScreen ({film}: MyListScreenProps): JSX.Element {
   );
 }
 
-export default ReviewScreen;
+export default AddReviewScreen;

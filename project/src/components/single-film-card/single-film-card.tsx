@@ -1,4 +1,8 @@
+import { Link } from 'react-router-dom';
 import { Film } from '../../types/film';
+
+import { AppRoute } from '../../const';
+
 
 type SingleFilmCardProps = {
   film: Film;
@@ -6,7 +10,7 @@ type SingleFilmCardProps = {
 }
 
 function SingleFilmCard ({ film, onFocusHandler }: SingleFilmCardProps) : JSX.Element {
-  const { name, poster } = film;
+  const { id, name, poster } = film;
 
   return (
     <article
@@ -17,7 +21,7 @@ function SingleFilmCard ({ film, onFocusHandler }: SingleFilmCardProps) : JSX.El
         <img src={poster} alt={name} width="280" height="175" />
       </div>
       <h3 className="small-film-card__title">
-        <a className="small-film-card__link" href="film-page.html">{name}</a>
+        <Link to={`${AppRoute.Film}/${id}`} className="small-film-card__link">{name}</Link>
       </h3>
     </article>
   );

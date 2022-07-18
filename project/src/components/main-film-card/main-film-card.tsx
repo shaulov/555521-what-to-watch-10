@@ -17,7 +17,7 @@ function MainFilmCard({film}: MainFilmCardProps) : JSX.Element {
       <h1 className="visually-hidden">WTW</h1>
 
       <header className="page-header film-card__head">
-        <Logo />
+        <Logo light={false}/>
 
         <UserBlock />
       </header>
