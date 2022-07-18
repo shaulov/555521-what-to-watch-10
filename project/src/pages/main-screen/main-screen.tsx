@@ -1,5 +1,6 @@
 import MainFilmCard from '../../components/main-film-card/main-film-card';
-import Catalog from '../../components/catalog/catalog';
+import GenresList from '../../components/genres-list/genres-list';
+import FilmsList from '../../components/films-list/films-list';
 
 import { Film } from '../../types/film';
 
@@ -45,7 +46,20 @@ function MainScreen ({films} : MainScreenProps): JSX.Element {
       <MainFilmCard film={films[0]}/>
 
       <div className="page-content">
-        <Catalog films={films} />
+
+        <section className="catalog">
+          <h2 className="catalog__title visually-hidden">Catalog</h2>
+
+          <GenresList />
+
+          <FilmsList
+            films={films}
+          />
+
+          <div className="catalog__more">
+            <button className="catalog__button" type="button">Show more</button>
+          </div>
+        </section>
 
         <footer className="page-footer">
           <div className="logo">
