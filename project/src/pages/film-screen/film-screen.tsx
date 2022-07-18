@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
@@ -6,10 +6,16 @@ import FilmsList from '../../components/films-list/films-list';
 
 import { AppRoute } from '../../const';
 
-import { films } from '../../mocks/films';
+import { Film } from '../../types/film';
 
-function FilmScreen (): JSX.Element {
-  // const { filmId } = useParams();
+type FilmScreenProps = {
+  films: Film[];
+}
+
+function FilmScreen ({films}: FilmScreenProps): JSX.Element {
+  const { filmId } = useParams();
+
+  const currentFilm = films.find((film) => film.id === filmId);
 
   return (
     <>
@@ -61,10 +67,10 @@ function FilmScreen (): JSX.Element {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title">{currentFilm?.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{currentFilm?.genre}</span>
+                <span className="film-card__year">{currentFilm?.releaseDate}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -90,7 +96,7 @@ function FilmScreen (): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={currentFilm?.poster} alt={`${currentFilm?.name} poster`} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
@@ -109,21 +115,19 @@ function FilmScreen (): JSX.Element {
               </nav>
 
               <div className="film-rating">
-                <div className="film-rating__score">8,9</div>
+                <div className="film-rating__score">{currentFilm?.rating}</div>
                 <p className="film-rating__meta">
                   <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">240 ratings</span>
+                  <span className="film-rating__count">{`${currentFilm?.ratingsNumber} ratings`}</span>
                 </p>
               </div>
 
               <div className="film-card__text">
-                <p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave`&apos;`s friend and protege.</p>
+                {currentFilm?.description ? [...currentFilm.description.map((paragraph) => <p key={paragraph}>{paragraph}</p>)] : null}
 
-                <p>Gustave prides himself on providing first-className service to the hotel`&apos;`s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave`&apos;`s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.</p>
+                <p className="film-card__director"><strong>{`Director: ${currentFilm?.description ? [...currentFilm.director.map((director) => `${director}`)] : null}`}</strong></p>
 
-                <p className="film-card__director"><strong>Director: Wes Anderson</strong></p>
-
-                <p className="film-card__starring"><strong>Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other</strong></p>
+                <p className="film-card__starring"><strong>{`Starring: ${currentFilm?.description ? [...currentFilm.starring.map((starring) => `${starring}, `)] : null} and other`}</strong></p>
               </div>
             </div>
           </div>

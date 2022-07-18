@@ -7,7 +7,7 @@ export type Film = {
   releaseDate: string,
   rating: number,
   ratingsNumber: number,
-  description: string,
+  description: string[],
   director: string[],
   starring: string[],
   video: string,
