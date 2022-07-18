@@ -6,7 +6,7 @@ import FilmScreen from '../../pages/film-screen/film-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
-import ReviewScreen from '../../pages/review-screen/review-screen';
+import ReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import Screen404 from '../../pages/404-screen/404-screen';
 
 import PrivateRoute from '../private-root/private-root';
@@ -28,7 +28,7 @@ function App({films, reviews}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Review}
-          element={<ReviewScreen film={films[0]} filmReview={reviews[0]} />}
+          element={<ReviewScreen film={films[0]} />}
         />
         <Route
           path={AppRoute.Film}
@@ -36,7 +36,7 @@ function App({films, reviews}: AppScreenProps): JSX.Element {
         >
           <Route
             path={AppRoute.Review}
-            element={<ReviewScreen film={films[0]} filmReview={reviews[0]} />}
+            element={<ReviewScreen film={films[0]} />}
           />
         </Route>
         <Route

@@ -2,6 +2,7 @@ export type Film = {
   id: string,
   name: string,
   poster: string,
+  background: string,
   genre: string[],
   releaseDate: string,
   rating: number,
