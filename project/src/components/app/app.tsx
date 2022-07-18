@@ -18,21 +18,13 @@ type AppScreenProps = {
   reviews: FilmReview[],
 }
 
-const randomFilm = {
-  name: 'The Grand Budapest Hotel',
-  genre: 'Drama',
-  releaseDate: '2014',
-};
-
 function App({films, reviews}: AppScreenProps): JSX.Element {
-  const { name, genre, releaseDate } = randomFilm;
-
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainScreen name={name} genre={genre} releaseDate={releaseDate} films={films} />}
+          element={<MainScreen films={films} />}
         />
         <Route
           path={AppRoute.Film}
