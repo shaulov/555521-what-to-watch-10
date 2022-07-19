@@ -1,11 +1,19 @@
+import { Link } from 'react-router-dom';
+
+import Logo from '../../components/logo/logo';
+import UserBlock from '../../components/user-block/user-block';
+import ReviewForm from '../../components/review-form/review-form';
+
+import { AppRoute } from '../../const';
+
 import { Film } from '../../types/film';
 
-type PlayerScreenProps = {
+type MyListScreenProps = {
   film: Film,
 }
 
-function PlayerScreen ({film}: PlayerScreenProps): JSX.Element {
-  const { name, video } = film;
+function AddReviewScreen ({film}: MyListScreenProps): JSX.Element {
+  const { id, name, poster, background } = film;
 
   return (
     <>
@@ -38,40 +46,43 @@ function PlayerScreen ({film}: PlayerScreenProps): JSX.Element {
         </svg>
       </div>
 
-      <div className="player">
-        <video src={video} className="player__video" poster="img/player-poster.jpg"></video>
-
-        <button type="button" className="player__exit">Exit</button>
-
-        <div className="player__controls">
-          <div className="player__controls-row">
-            <div className="player__time">
-              <progress className="player__progress" value="30" max="100"></progress>
-              <div className="player__toggler" style={{left: '30%'}}>Toggler</div>
-            </div>
-            <div className="player__time-value">1:30:29</div>
+      <section className="film-card film-card--full">
+        <div className="film-card__header">
+          <div className="film-card__bg">
+            <img src={background} alt="The Grand Budapest Hotel" />
           </div>
 
-          <div className="player__controls-row">
-            <button type="button" className="player__play">
-              <svg viewBox="0 0 19 19" width="19" height="19">
-                <use xlinkHref="#play-s"></use>
-              </svg>
-              <span>Play</span>
-            </button>
-            <div className="player__name">{name}</div>
+          <h1 className="visually-hidden">WTW</h1>
 
-            <button type="button" className="player__full-screen">
-              <svg viewBox="0 0 27 27" width="27" height="27">
-                <use xlinkHref="#full-screen"></use>
-              </svg>
-              <span>Full screen</span>
-            </button>
+          <header className="page-header">
+            <Logo light={false} />
+
+            <nav className="breadcrumbs">
+              <ul className="breadcrumbs__list">
+                <li className="breadcrumbs__item">
+                  <Link to={`${AppRoute.Film}/${id}`} className="breadcrumbs__link">{name}</Link>
+                </li>
+                <li className="breadcrumbs__item">
+                  <a className="breadcrumbs__link">Add review</a>
+                </li>
+              </ul>
+            </nav>
+
+            <UserBlock />
+          </header>
+
+          <div className="film-card__poster film-card__poster--small">
+            <img src={poster} alt={`${name} poster`} width="218" height="327" />
           </div>
         </div>
-      </div>
+
+        <div className="add-review">
+          <ReviewForm />
+        </div>
+
+      </section>
     </>
   );
 }
 
-export default PlayerScreen;
+export default AddReviewScreen;

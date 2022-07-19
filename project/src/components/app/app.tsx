@@ -6,45 +6,48 @@ import FilmScreen from '../../pages/film-screen/film-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
-import ReviewScreen from '../../pages/review-screen/review-screen';
+import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import Screen404 from '../../pages/404-screen/404-screen';
 
 import PrivateRoute from '../private-root/private-root';
 
-const randomFilm = {
-  name: 'The Grand Budapest Hotel',
-  genre: 'Drama',
-  releaseDate: '2014',
-};
+import { Film, FilmReview } from '../../types/film';
 
-function App(): JSX.Element {
-  const { name, genre, releaseDate } = randomFilm;
+type AppScreenProps = {
+  films: Film[],
+  reviews: FilmReview[],
+}
 
+function App({films, reviews}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainScreen name={name} genre={genre} releaseDate={releaseDate} />}
+          element={<MainScreen films={films} />}
         />
         <Route
           path={AppRoute.Film}
-          element={<FilmScreen />}
         >
           <Route
-            path={AppRoute.Review}
-            element={<ReviewScreen />}
-          />
+            path=":filmId"
+            element={<FilmScreen films={films}/>}
+          >
+            <Route
+              path={AppRoute.Review}
+              element={<AddReviewScreen film={films[0]} />}
+            />
+          </Route>
         </Route>
         <Route
           path={AppRoute.Player}
-          element={<PlayerScreen />}
+          element={<PlayerScreen film={films[0]} />}
         />
         <Route
           path={AppRoute.MyList}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <MyListScreen />
+            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <MyListScreen films={films}/>
             </PrivateRoute>
           }
         />
