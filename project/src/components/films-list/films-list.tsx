@@ -9,7 +9,8 @@ type FilmsListProps = {
 }
 
 function FilmsList({ films }: FilmsListProps): JSX.Element {
-  const [activeFilm, setActiveFilm] = useState({});
+  const activeFilm = useState({});
+  const setActiveFilm = activeFilm[1];
 
   const onFocusHandler = (film: Film) => {
     setActiveFilm(film);
