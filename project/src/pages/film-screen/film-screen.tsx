@@ -4,7 +4,7 @@ import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import FilmsList from '../../components/films-list/films-list';
 
-import { AppRoute } from '../../const';
+import { AppRoute, SIMILAR_FILMS_COUNT } from '../../const';
 
 import { Film } from '../../types/film';
 
@@ -106,7 +106,7 @@ function FilmScreen ({films}: FilmScreenProps): JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <FilmsList films={films.slice(4)}/>
+          <FilmsList films={films} filmsCount={SIMILAR_FILMS_COUNT}/>
         </section>
 
         <footer className="page-footer">
