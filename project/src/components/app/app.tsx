@@ -8,6 +8,7 @@ import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import Screen404 from '../../pages/404-screen/404-screen';
+import ScrollToTop from '../../components/scroll-to-top/scroll-to-top';
 
 import PrivateRoute from '../private-root/private-root';
 
@@ -21,6 +22,7 @@ type AppScreenProps = {
 function App({films, reviews}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route
           path={AppRoute.Root}
