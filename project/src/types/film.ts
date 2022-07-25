@@ -5,6 +5,7 @@ export type Film = {
   background: string,
   genre: string[],
   releaseDate: string,
+  runTime: number,
   rating: number,
   ratingsNumber: number,
   description: string[],

@@ -6,16 +6,18 @@ import FilmsList from '../../components/films-list/films-list';
 
 import { AppRoute, SIMILAR_FILMS_COUNT } from '../../const';
 
-import { Film } from '../../types/film';
+import { Film, FilmReview } from '../../types/film';
 
 type FilmScreenProps = {
   films: Film[];
+  reviews: FilmReview[];
 }
 
-function FilmScreen ({films}: FilmScreenProps): JSX.Element {
+function FilmScreen ({films, reviews}: FilmScreenProps): JSX.Element {
   const { filmId } = useParams();
 
   const currentFilm = films.find((film) => film.id === filmId);
+  // const currentReview = reviews.find((review) => review.filmId === filmId);
 
   return (
     <>
@@ -82,21 +84,6 @@ function FilmScreen ({films}: FilmScreenProps): JSX.Element {
                 </ul>
               </nav>
 
-              <div className="film-rating">
-                <div className="film-rating__score">{currentFilm?.rating}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">{`${currentFilm?.ratingsNumber} ratings`}</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                {currentFilm?.description ? [...currentFilm.description.map((paragraph) => <p key={paragraph}>{paragraph}</p>)] : null}
-
-                <p className="film-card__director"><strong>{`Director: ${currentFilm?.description ? [...currentFilm.director.map((director) => `${director}`)] : null}`}</strong></p>
-
-                <p className="film-card__starring"><strong>{`Starring: ${currentFilm?.description ? [...currentFilm.starring.map((starring) => `${starring}, `)] : null} and other`}</strong></p>
-              </div>
             </div>
           </div>
         </div>
