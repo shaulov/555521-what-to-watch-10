@@ -20,3 +20,7 @@ export const FILMS_PER_STEP_COUNT = 8;
 export const SIMILAR_FILMS_COUNT = 4;
 
 export const PREVIEW_ACTIVATION_TIME = 1000;
+
+export const COUNT_REVIEWS_IN_COL = 3;
+
+export const SHORT_STAIRS_NUMBER = 3;

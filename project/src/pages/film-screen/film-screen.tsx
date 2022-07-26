@@ -3,19 +3,26 @@ import { Link, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import FilmsList from '../../components/films-list/films-list';
+import FilmCardNavigation from '../../components/film-card-navigation/film-card-navigation';
 
-import { AppRoute, SIMILAR_FILMS_COUNT } from '../../const';
+import { AppRoute } from '../../const';
 
-import { Film } from '../../types/film';
+import { Film, FilmReview } from '../../types/film';
 
 type FilmScreenProps = {
   films: Film[];
+  reviews: FilmReview[];
 }
 
-function FilmScreen ({films}: FilmScreenProps): JSX.Element {
-  const { filmId } = useParams();
+type FilmId = {
+  filmId: string;
+}
 
-  const currentFilm = films.find((film) => film.id === filmId);
+function FilmScreen ({films, reviews}: FilmScreenProps): JSX.Element {
+  const { filmId } = useParams<FilmId>();
+  const filmIndex = Number(filmId) - 1;
+
+  const {name, genre, releaseDate, poster} = films[filmIndex];
 
   return (
     <>
@@ -35,10 +42,10 @@ function FilmScreen ({films}: FilmScreenProps): JSX.Element {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{currentFilm?.name}</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{currentFilm?.genre}</span>
-                <span className="film-card__year">{currentFilm?.releaseDate}</span>
+                <span className="film-card__genre">{genre}</span>
+                <span className="film-card__year">{releaseDate}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -64,40 +71,11 @@ function FilmScreen ({films}: FilmScreenProps): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={currentFilm?.poster} alt={`${currentFilm?.name} poster`} width="218" height="327" />
+              <img src={poster} alt={`${name} poster`} width="218" height="327" />
             </div>
 
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="#" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
+            <FilmCardNavigation currentFilm={films[filmIndex]} currentReview={reviews[filmIndex]}/>
 
-              <div className="film-rating">
-                <div className="film-rating__score">{currentFilm?.rating}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">{`${currentFilm?.ratingsNumber} ratings`}</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                {currentFilm?.description ? [...currentFilm.description.map((paragraph) => <p key={paragraph}>{paragraph}</p>)] : null}
-
-                <p className="film-card__director"><strong>{`Director: ${currentFilm?.description ? [...currentFilm.director.map((director) => `${director}`)] : null}`}</strong></p>
-
-                <p className="film-card__starring"><strong>{`Starring: ${currentFilm?.description ? [...currentFilm.starring.map((starring) => `${starring}, `)] : null} and other`}</strong></p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -106,7 +84,7 @@ function FilmScreen ({films}: FilmScreenProps): JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <FilmsList films={films} filmsCount={SIMILAR_FILMS_COUNT}/>
+          <FilmsList films={films} filmsGenre={genre}/>
         </section>
 
         <footer className="page-footer">

@@ -2,17 +2,17 @@ import { SingleReview } from '../../types/film';
 
 import { MONTH } from '../../const';
 
-type SingleReviewCardProps = {
-  review: SingleReview,
+type SingleFilmReviewProps = {
+  review: SingleReview;
 }
 
-function SingleReviewCard({review}: SingleReviewCardProps): JSX.Element {
+function SingleFilmReview({review}: SingleFilmReviewProps): JSX.Element {
   const { author, reviewDate, rating, content } = review;
 
   const date = `${MONTH[reviewDate.getMonth()]} ${reviewDate.getDate()}, ${reviewDate.getFullYear()}`;
   const dateTime = `${reviewDate.getFullYear()}-${reviewDate.getMonth() + 1}-${reviewDate.getDate()}`;
 
-  return (
+  return(
     <div className="review">
       <blockquote className="review__quote">
         <p className="review__text">{content}</p>
@@ -28,4 +28,4 @@ function SingleReviewCard({review}: SingleReviewCardProps): JSX.Element {
   );
 }
 
-export default SingleReviewCard;
+export default SingleFilmReview;
