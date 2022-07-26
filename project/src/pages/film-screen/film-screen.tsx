@@ -84,7 +84,7 @@ function FilmScreen ({films, reviews}: FilmScreenProps): JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <FilmsList films={films} filmsCount={SIMILAR_FILMS_COUNT}/>
+          <FilmsList films={films} filmsCount={SIMILAR_FILMS_COUNT} filmsGenre={genre}/>
         </section>
 
         <footer className="page-footer">
