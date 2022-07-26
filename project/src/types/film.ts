@@ -8,8 +8,8 @@ export type Film = {
   runTime: number,
   rating: number,
   ratingsNumber: number,
-  description: string[],
-  director: string[],
+  description: string,
+  director: string,
   starring: string[],
   video: string,
 }

@@ -1,3 +1,5 @@
+// import { useState } from 'react';
+
 import { Film } from '../../types/film';
 
 import { SHORT_STAIRS_NUMBER } from '../../const';
@@ -24,17 +26,6 @@ function FilmOverview({film}: FilmOverviewProps) : JSX.Element {
     filmRatingLevel = 'Awesome';
   }
 
-  const renderFilmDescription = () => {
-    if (!description) {
-      return null;
-    }
-
-    return description.map((paragraph) => <p key={paragraph}>{paragraph}</p>);
-  };
-
-  const filmDirector = director ? `Director: ${director}` : null;
-  const filmStarring = starring ? `Starring: ${starring.slice(0, SHORT_STAIRS_NUMBER).join(', ')} and other` : null;
-
   return(
     <>
       <div className="film-rating">
@@ -46,11 +37,11 @@ function FilmOverview({film}: FilmOverviewProps) : JSX.Element {
       </div>
 
       <div className="film-card__text">
-        {renderFilmDescription()}
+        <p>{description}</p>
 
-        <p className="film-card__director"><strong>{filmDirector}</strong></p>
+        <p className="film-card__director"><strong>{`Director: ${director}`}</strong></p>
 
-        <p className="film-card__starring"><strong>{filmStarring}</strong></p>
+        <p className="film-card__starring"><strong>{`Starring: ${starring.slice(0, SHORT_STAIRS_NUMBER).join(', ')} and other`}</strong></p>
       </div>
     </>
   );
