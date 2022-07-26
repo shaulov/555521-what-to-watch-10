@@ -1,5 +1,3 @@
-// import { useState } from 'react';
-
 import { Film } from '../../types/film';
 
 import { SHORT_STAIRS_NUMBER } from '../../const';
