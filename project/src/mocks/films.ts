@@ -2,7 +2,7 @@ import { Film } from '../types/film';
 
 export const films : Film[] = [
   {
-    id: '100233',
+    id: '1',
     name: 'The Grand Budapest Hotel',
     poster: 'img/the-grand-budapest-hotel-poster.jpg',
     background: 'img/bg-the-grand-budapest-hotel.jpg',
@@ -17,7 +17,7 @@ export const films : Film[] = [
     video: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
   },
   {
-    id: '103233',
+    id: '2',
     name: 'The Grand Budapest Hotel',
     poster: 'img/snatch.jpg',
     background: 'img/bg-the-grand-budapest-hotel.jpg',
@@ -32,7 +32,7 @@ export const films : Film[] = [
     video: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
   },
   {
-    id: '113233',
+    id: '3',
     name: 'The Grand Budapest Hotel',
     poster: 'img/shutter-island.jpg',
     background: 'img/bg-the-grand-budapest-hotel.jpg',
@@ -47,7 +47,7 @@ export const films : Film[] = [
     video: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
   },
   {
-    id: '103293',
+    id: '4',
     name: 'The Grand Budapest Hotel',
     poster: 'img/midnight-special.jpg',
     background: 'img/bg-the-grand-budapest-hotel.jpg',
@@ -62,7 +62,7 @@ export const films : Film[] = [
     video: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
   },
   {
-    id: '109733',
+    id: '5',
     name: 'The Grand Budapest Hotel',
     poster: 'img/revenant.jpg',
     background: 'img/bg-the-grand-budapest-hotel.jpg',
@@ -77,7 +77,7 @@ export const films : Film[] = [
     video: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
   },
   {
-    id: '155233',
+    id: '6',
     name: 'The Grand Budapest Hotel',
     poster: 'img/mindhunter.jpg',
     background: 'img/bg-the-grand-budapest-hotel.jpg',
@@ -92,7 +92,7 @@ export const films : Film[] = [
     video: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
   },
   {
-    id: '103993',
+    id: '7',
     name: 'The Grand Budapest Hotel',
     poster: 'img/midnight-special.jpg',
     background: 'img/bg-the-grand-budapest-hotel.jpg',
@@ -107,7 +107,7 @@ export const films : Film[] = [
     video: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
   },
   {
-    id: '166733',
+    id: '8',
     name: 'The Grand Budapest Hotel',
     poster: 'img/macbeth.jpg',
     background: 'img/bg-the-grand-budapest-hotel.jpg',

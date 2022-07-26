@@ -2,7 +2,7 @@ import { FilmReview } from '../types/film';
 
 export const reviews: FilmReview[] = [
   {
-    filmId: '100233',
+    filmId: '1',
     review: [
       {
         id: '472992',
@@ -49,7 +49,7 @@ export const reviews: FilmReview[] = [
     ],
   },
   {
-    filmId: '103233',
+    filmId: '2',
     review: [
       {
         id: '472992',
@@ -96,7 +96,7 @@ export const reviews: FilmReview[] = [
     ],
   },
   {
-    filmId: '113233',
+    filmId: '3',
     review: [
       {
         id: '472992',
@@ -143,7 +143,7 @@ export const reviews: FilmReview[] = [
     ],
   },
   {
-    filmId: '103293',
+    filmId: '4',
     review: [
       {
         id: '472992',
@@ -190,7 +190,7 @@ export const reviews: FilmReview[] = [
     ],
   },
   {
-    filmId: '109733',
+    filmId: '5',
     review: [
       {
         id: '472992',
@@ -237,7 +237,7 @@ export const reviews: FilmReview[] = [
     ],
   },
   {
-    filmId: '155233',
+    filmId: '6',
     review: [
       {
         id: '472992',
@@ -284,7 +284,7 @@ export const reviews: FilmReview[] = [
     ],
   },
   {
-    filmId: '103993',
+    filmId: '7',
     review: [
       {
         id: '472992',
@@ -331,7 +331,7 @@ export const reviews: FilmReview[] = [
     ],
   },
   {
-    filmId: '166733',
+    filmId: '8',
     review: [
       {
         id: '472992',
