@@ -17,10 +17,6 @@ export const reducer = createReducer(initialState, (builder) => {
       state.genre = action.payload;
     })
     .addCase(getFilmList, (state) => {
-      if (state.genre === DEFAULT_GENRE) {
-        state.films = films;
-        return;
-      }
-      state.films = films.filter((film) => film.genre === state.genre);
+      state.films = state.genre === DEFAULT_GENRE ? films : films.filter((film) => film.genre === state.genre);
     });
 });
