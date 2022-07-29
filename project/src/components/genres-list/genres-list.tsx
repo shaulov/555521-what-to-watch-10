@@ -14,7 +14,7 @@ function GenresList({genres, onFilterChange}: GenresListProps): JSX.Element {
     <ul className="catalog__genres-list">
       {
         genres.map((genre) => (
-          <li key={genre} className={`catalog__genres-item ${genre === activeGenre ? 'catalog__genres-item--active' : ''}`}>
+          <li key={genre} className={`catalog__genres-item ${genre === activeGenre && 'catalog__genres-item--active'}`}>
             <Link to={'#'} className="catalog__genres-link" onClick={() => onFilterChange(genre)}>{genre}</Link>
           </li>
         ))
