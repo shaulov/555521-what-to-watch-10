@@ -2,8 +2,7 @@ import {Link} from 'react-router-dom';
 
 type NavigationTabContentProps = {
   activeTab: string;
-  onClickHandler: (evt: React.MouseEvent<HTMLAnchorElement, MouseEvent> & {target: {tagName: string; textContent: string}}
-    ) => void;
+  onClickHandler: (value: string) => void;
     titleTabs: string[];
 }
 
@@ -13,7 +12,7 @@ function NavigationTabContent({activeTab, onClickHandler, titleTabs}: Navigation
       {
         titleTabs.map((title) => (
           <li key={title} className={activeTab === `${title}` ? 'film-nav__item film-nav__item--active' : 'film-nav__item'}>
-            <Link to={'#'} className="film-nav__link" onClick={onClickHandler}>{title}</Link>
+            <Link to={'#'} className="film-nav__link" onClick={() => onClickHandler(title)}>{title}</Link>
           </li>
         ))
       }

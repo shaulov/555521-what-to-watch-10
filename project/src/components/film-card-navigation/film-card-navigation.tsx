@@ -21,17 +21,10 @@ function FilmCardNavigation({currentFilm, currentReview}: FilmCardNavigationProp
     ['Reviews', <FilmReviews key={2} filmReviews={currentReview} />]
   ]);
 
-  const handleClick = (evt: React.MouseEvent<HTMLAnchorElement, MouseEvent> & {target: {tagName: string; textContent: string}}) => {
-    if (evt.target.tagName === 'A') {
-      evt.preventDefault();
-      setActiveTab(evt.target.textContent);
-    }
-  };
-
   return(
     <div className="film-card__desc">
       <nav className="film-nav film-card__nav">
-        <NavigationTabContent activeTab={activeTab} onClickHandler={handleClick} titleTabs={Array.from(navigationTabs.keys())}/>
+        <NavigationTabContent activeTab={activeTab} onClickHandler={setActiveTab} titleTabs={Array.from(navigationTabs.keys())}/>
       </nav>
 
       {navigationTabs.get(activeTab)}

@@ -26,7 +26,7 @@ function App({films, reviews}: AppScreenProps): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainScreen films={films} />}
+          element={<MainScreen />}
         />
         <Route
           path={AppRoute.Film}

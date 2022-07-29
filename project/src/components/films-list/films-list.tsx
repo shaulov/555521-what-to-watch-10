@@ -4,16 +4,13 @@ import { Film } from '../../types/film';
 
 type FilmsListProps = {
   films: Film[];
-  filmsGenre?: string;
 }
 
-function FilmsList({ films, filmsGenre }: FilmsListProps): JSX.Element {
-  const showedFilms = filmsGenre ? films.filter((film) => film.genre === filmsGenre) : films;
-
+function FilmsList({ films }: FilmsListProps): JSX.Element {
   return(
     <div className="catalog__films-list">
       {
-        showedFilms.map((film) => (
+        films.map((film) => (
           <SingleFilmCard
             key={film.id}
             film={film}
