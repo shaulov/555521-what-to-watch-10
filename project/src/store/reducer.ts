@@ -3,7 +3,7 @@ import { changeGenre, getFilmList } from './action';
 import { films } from '../mocks/films';
 import { reviews } from '../mocks/reviews';
 
-import { GENRES, DEFAULT_GENRE } from '../const';
+import { DEFAULT_GENRE } from '../const';
 
 const initialState = {
   genre: DEFAULT_GENRE,
@@ -17,7 +17,7 @@ export const reducer = createReducer(initialState, (builder) => {
       state.genre = action.payload;
     })
     .addCase(getFilmList, (state) => {
-      if (state.genre === GENRES[0]) {
+      if (state.genre === DEFAULT_GENRE) {
         state.films = films;
         return;
       }
