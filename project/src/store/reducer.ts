@@ -1,12 +1,14 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { changeGenre, getFilmList } from './action';
 import { films } from '../mocks/films';
+import { reviews } from '../mocks/reviews';
 
 import { GENRES, DEFAULT_GENRE } from '../const';
 
 const initialState = {
   genre: DEFAULT_GENRE,
-  films: films,
+  films,
+  reviews,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
