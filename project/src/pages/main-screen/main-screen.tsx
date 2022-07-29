@@ -1,20 +1,22 @@
-import { useState } from 'react';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import { changeGenre, getFilmList } from '../../store/action';
 
 import MainFilmCard from '../../components/main-film-card/main-film-card';
 import GenresList from '../../components/genres-list/genres-list';
 import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 
-import { Film } from '../../types/film';
-
 import { GENRES } from '../../const';
 
-type MainScreenProps = {
-  films: Film[];
-}
+function MainScreen (): JSX.Element {
+  const films = useAppSelector((state) => state.films);
 
-function MainScreen ({films} : MainScreenProps): JSX.Element {
-  const [activeGenre, setActiveGenre] = useState('All genres');
+  const dispatch = useAppDispatch();
+
+  const onFilterChange = (genre: string) => {
+    dispatch(changeGenre(genre));
+    dispatch(getFilmList());
+  };
 
   return (
     <>
@@ -25,7 +27,7 @@ function MainScreen ({films} : MainScreenProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresList genres={GENRES} onClickHandler={setActiveGenre} activeGenre={activeGenre} />
+          <GenresList genres={GENRES} onFilterChange={onFilterChange} />
 
           <FilmsList films={films} />
 

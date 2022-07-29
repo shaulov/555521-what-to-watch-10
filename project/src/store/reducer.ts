@@ -2,10 +2,10 @@ import { createReducer } from '@reduxjs/toolkit';
 import { changeGenre, getFilmList } from './action';
 import { films } from '../mocks/films';
 
-import { GENRES } from '../const';
+import { GENRES, DEFAULT_GENRE } from '../const';
 
 const initialState = {
-  genre: '',
+  genre: DEFAULT_GENRE,
   films: films,
 };
 
@@ -14,10 +14,11 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(changeGenre, (state, action) => {
       state.genre = action.payload;
     })
-    .addCase(getFilmList, (state, action) => {
-      if (action.payload === GENRES[0]) {
+    .addCase(getFilmList, (state) => {
+      if (state.genre === GENRES[0]) {
         state.films = films;
+        return;
       }
-      state.films.map((film) => film.genre === action.payload);
+      state.films = films.filter((film) => film.genre === state.genre);
     });
 });
