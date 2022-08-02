@@ -1,12 +1,10 @@
+import { useAppSelector } from '../../hooks';
+
 import SingleFilmCard from '../../components/single-film-card/single-film-card';
 
-import { Film } from '../../types/film';
+function FilmsList(): JSX.Element {
+  const films = useAppSelector((state) => state.films);
 
-type FilmsListProps = {
-  films: Film[];
-}
-
-function FilmsList({ films }: FilmsListProps): JSX.Element {
   return(
     <div className="catalog__films-list">
       {

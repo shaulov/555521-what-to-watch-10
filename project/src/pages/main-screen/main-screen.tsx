@@ -5,6 +5,7 @@ import MainFilmCard from '../../components/main-film-card/main-film-card';
 import GenresList from '../../components/genres-list/genres-list';
 import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
+import MoreButton from '../../components/more-button/more-button';
 
 import { GENRES } from '../../const';
 
@@ -29,11 +30,9 @@ function MainScreen (): JSX.Element {
 
           <GenresList genres={GENRES} onFilterChange={onFilterChange} />
 
-          <FilmsList films={films} />
+          <FilmsList />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <MoreButton />
         </section>
 
         <footer className="page-footer">
