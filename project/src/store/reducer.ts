@@ -16,6 +16,7 @@ export const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeGenre, (state, action) => {
       state.genre = action.payload;
+      state.filmsPerStep = FILMS_PER_STEP_COUNT;
     })
     .addCase(getFilmList, (state) => {
       state.films = state.genre === DEFAULT_GENRE ? films : films.filter((film) => film.genre === state.genre);
