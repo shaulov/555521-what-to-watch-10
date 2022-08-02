@@ -19,14 +19,14 @@ function MyListScreen ({films}: MyListScreenProps): JSX.Element {
       </header>
 
       <section className="catalog">
-        <FilmsList />
+        <FilmsList films={films}/>
       </section>
 
       <footer className="page-footer">
         <Logo light />
 
         <div className="copyright">
-          <p>© 2022 What to watch Ltd.</p>
+          <p>© 2019 What to watch Ltd.</p>
         </div>
       </footer>
     </div>
