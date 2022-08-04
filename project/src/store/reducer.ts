@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeGenre, getFilmList, showMoreFilms, loadFilms, requireAuthorization } from './action';
+import { changeGenre, getFilmList, showMoreFilms, loadFilms, requireAuthorization, setError } from './action';
 import { reviews } from '../mocks/reviews';
 import { Films, FilmReview } from '../types/film';
 
@@ -11,6 +11,7 @@ type InitialState = {
   reviews: FilmReview[],
   filmsPerStep: number,
   authorizationStatus: string,
+  error: string | null,
 }
 
 const initialState: InitialState = {
@@ -19,6 +20,7 @@ const initialState: InitialState = {
   reviews,
   filmsPerStep: FILMS_PER_STEP_COUNT,
   authorizationStatus: AuthorizationStatus.Unknown,
+  error: null,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -38,5 +40,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
     });
 });
