@@ -1,5 +1,6 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { useAppSelector } from '../../hooks';
 
 import MainScreen from '../../pages/main-screen/main-screen';
 import FilmScreen from '../../pages/film-screen/film-screen';
@@ -13,14 +14,10 @@ import ResetFilmList from '../../utils/resetFilmList';
 
 import PrivateRoute from '../private-root/private-root';
 
-import { Film, FilmReview } from '../../types/film';
+function App(): JSX.Element {
+  const films = useAppSelector((state) => state.films);
+  const reviews = useAppSelector((state) => state.reviews);
 
-type AppScreenProps = {
-  films: Film[],
-  reviews: FilmReview[],
-}
-
-function App({films, reviews}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <ScrollToTop />
