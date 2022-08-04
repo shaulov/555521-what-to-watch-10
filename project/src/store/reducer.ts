@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeGenre, getFilmList, showMoreFilms, loadFilms, requireAuthorization, setError } from './action';
+import { changeGenre, getFilmList, showMoreFilms, loadFilms, setDataLoadedStatus, requireAuthorization, setError } from './action';
 import { reviews } from '../mocks/reviews';
 import { Films, FilmReview } from '../types/film';
 
@@ -8,18 +8,22 @@ import { DEFAULT_GENRE, FILMS_PER_STEP_COUNT, AuthorizationStatus } from '../con
 type InitialState = {
   genre: string,
   films: Films,
+  filmsByGenre: Films,
   reviews: FilmReview[],
   filmsPerStep: number,
-  authorizationStatus: string,
+  authorizationStatus: AuthorizationStatus,
+  isDataLoaded: boolean,
   error: string | null,
 }
 
 const initialState: InitialState = {
   genre: DEFAULT_GENRE,
   films: [],
+  filmsByGenre: [],
   reviews,
   filmsPerStep: FILMS_PER_STEP_COUNT,
   authorizationStatus: AuthorizationStatus.Unknown,
+  isDataLoaded: false,
   error: null,
 };
 
@@ -37,6 +41,9 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadFilms, (state, action) => {
       state.films = action.payload;
+    })
+    .addCase(setDataLoadedStatus, (state, action) => {
+      state.isDataLoaded = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;

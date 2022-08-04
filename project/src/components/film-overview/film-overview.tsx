@@ -10,7 +10,7 @@ type FilmOverviewProps = {
 
 function FilmOverview({film}: FilmOverviewProps) : JSX.Element {
 
-  const { rating, ratingsNumber, description, director, starring } = film;
+  const { rating, scoresCount, description, director, starring } = film;
 
   return(
     <>
@@ -18,7 +18,7 @@ function FilmOverview({film}: FilmOverviewProps) : JSX.Element {
         <div className="film-rating__score">{rating}</div>
         <p className="film-rating__meta">
           <span className="film-rating__level">{getFilmRatingLevel(rating)}</span>
-          <span className="film-rating__count">{`${ratingsNumber} ratings`}</span>
+          <span className="film-rating__count">{`${scoresCount} ratings`}</span>
         </p>
       </div>
 

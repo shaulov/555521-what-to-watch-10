@@ -22,7 +22,7 @@ function FilmScreen ({films, reviews}: FilmScreenProps): JSX.Element {
   const { filmId } = useParams<FilmId>();
   const filmIndex = Number(filmId) - 1;
 
-  const {name, genre, releaseDate, poster} = films[filmIndex];
+  const {name, genre, released, posterImage} = films[filmIndex];
 
   return (
     <>
@@ -45,7 +45,7 @@ function FilmScreen ({films, reviews}: FilmScreenProps): JSX.Element {
               <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{releaseDate}</span>
+                <span className="film-card__year">{released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -71,7 +71,7 @@ function FilmScreen ({films, reviews}: FilmScreenProps): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={poster} alt={`${name} poster`} width="218" height="327" />
+              <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
 
             <FilmCardNavigation currentFilm={films[filmIndex]} currentReview={reviews[filmIndex]}/>

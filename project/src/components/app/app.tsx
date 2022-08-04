@@ -1,5 +1,5 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
 
 import MainScreen from '../../pages/main-screen/main-screen';
@@ -9,14 +9,21 @@ import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import Screen404 from '../../pages/404-screen/404-screen';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import ScrollToTop from '../../components/scroll-to-top/scroll-to-top';
-import ResetFilmList from '../../utils/resetFilmList';
-
 import PrivateRoute from '../private-root/private-root';
 
+import ResetFilmList from '../../utils/resetFilmList';
+import { isCheckedAuth } from '../../utils/isCheckedAuth';
+
 function App(): JSX.Element {
-  const films = useAppSelector((state) => state.films);
-  const reviews = useAppSelector((state) => state.reviews);
+  const { films, reviews, authorizationStatus, isDataLoaded } = useAppSelector((state) => state);
+
+  if (isCheckedAuth(authorizationStatus) || isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <BrowserRouter>
@@ -47,7 +54,7 @@ function App(): JSX.Element {
         <Route
           path={AppRoute.MyList}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <PrivateRoute authorizationStatus={authorizationStatus}>
               <MyListScreen films={films}/>
             </PrivateRoute>
           }

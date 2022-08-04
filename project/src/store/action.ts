@@ -10,6 +10,8 @@ export const showMoreFilms = createAction<number>('film/showMoreFilms');
 
 export const loadFilms = createAction<Films>('data/loadFilms');
 
+export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
+
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
 export const setError = createAction<string | null>('film/setError');

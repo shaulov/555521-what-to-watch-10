@@ -6,7 +6,7 @@ type FilmDetailsProps = {
 }
 
 function FilmDetails({film}: FilmDetailsProps) : JSX.Element {
-  const { director, starring, runTime, genre, releaseDate } = film;
+  const { director, starring, runTime, genre, released } = film;
 
   const filmRunTime = `${Math.trunc(runTime / 60)}h ${99 % 60}m`;
 
@@ -36,7 +36,7 @@ function FilmDetails({film}: FilmDetailsProps) : JSX.Element {
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Released</strong>
-          <span className="film-card__details-value">{releaseDate}</span>
+          <span className="film-card__details-value">{released}</span>
         </p>
       </div>
     </div>

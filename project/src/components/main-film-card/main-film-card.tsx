@@ -11,7 +11,7 @@ function MainFilmCard({film}: MainFilmCardProps) : JSX.Element {
   return (
     <section className="film-card">
       <div className="film-card__bg">
-        <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+        <img src={film.backgroundImage} alt="The Grand Budapest Hotel" />
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -25,14 +25,14 @@ function MainFilmCard({film}: MainFilmCardProps) : JSX.Element {
       <div className="film-card__wrap">
         <div className="film-card__info">
           <div className="film-card__poster">
-            <img src={film.poster} alt="The Grand Budapest Hotel poster" width="218" height="327" />
+            <img src={film.posterImage} alt="The Grand Budapest Hotel poster" width="218" height="327" />
           </div>
 
           <div className="film-card__desc">
             <h2 className="film-card__title">{film.name}</h2>
             <p className="film-card__meta">
               <span className="film-card__genre">{film.genre}</span>
-              <span className="film-card__year">{film.releaseDate}</span>
+              <span className="film-card__year">{film.released}</span>
             </p>
 
             <div className="film-card__buttons">

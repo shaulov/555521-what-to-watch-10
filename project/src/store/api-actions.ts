@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import { Films } from '../types/film';
-import { loadFilms,requireAuthorization, setError } from './action';
+import { loadFilms,requireAuthorization, setDataLoadedStatus, setError } from './action';
 import { saveToken, dropToken } from '../services/token';
 import { APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
 import { AuthData } from '../types/auth-data';
@@ -27,7 +27,9 @@ export const fetchFilmAction = createAsyncThunk<void, undefined, {
   'data/fetchFilms',
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<Films>(APIRoute.Films);
+    dispatch(setDataLoadedStatus(true));
     dispatch(loadFilms(data));
+    dispatch(setDataLoadedStatus(false));
   },
 );
 
