@@ -4,4 +4,4 @@ export const changeGenre = createAction<string>('film/changeGenre');
 
 export const getFilmList = createAction('film/getFilmList');
 
-export const showMoreFilms = createAction<number>('main/showMoreFilms');
+export const showMoreFilms = createAction<number>('film/showMoreFilms');
