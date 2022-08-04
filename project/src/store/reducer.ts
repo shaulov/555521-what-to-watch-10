@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeGenre, getFilmList, showMoreFilms } from './action';
+import { changeGenre, getFilmList, showMoreFilms, loadFilms } from './action';
 import { films } from '../mocks/films';
 import { reviews } from '../mocks/reviews';
 
@@ -23,5 +23,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(showMoreFilms, (state, action) => {
       state.filmsPerStep = action.payload;
+    })
+    .addCase(loadFilms, (state, action) => {
+      state.films = action.payload;
     });
 });

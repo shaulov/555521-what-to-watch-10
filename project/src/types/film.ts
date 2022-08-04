@@ -14,6 +14,8 @@ export type Film = {
   video: string,
 }
 
+export type Films = Film[];
+
 export type SingleReview = {
   id: string,
   author: string,
