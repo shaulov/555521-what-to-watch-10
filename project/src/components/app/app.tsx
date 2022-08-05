@@ -14,12 +14,11 @@ import ScrollToTop from '../../components/scroll-to-top/scroll-to-top';
 import PrivateRoute from '../private-root/private-root';
 
 import ResetFilmList from '../../utils/resetFilmList';
-import { isCheckedAuth } from '../../utils/isCheckedAuth';
 
 function App(): JSX.Element {
   const { films, reviews, authorizationStatus, isDataLoaded } = useAppSelector((state) => state);
 
-  if (isCheckedAuth(authorizationStatus) || isDataLoaded) {
+  if (!isDataLoaded) {
     return (
       <LoadingScreen />
     );

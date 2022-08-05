@@ -11,7 +11,7 @@ function MainFilmCard({film}: MainFilmCardProps) : JSX.Element {
   return (
     <section className="film-card">
       <div className="film-card__bg">
-        <img src={film.backgroundImage} alt="The Grand Budapest Hotel" />
+        <img src={film.backgroundImage} alt={film.name} />
       </div>
 
       <h1 className="visually-hidden">WTW</h1>

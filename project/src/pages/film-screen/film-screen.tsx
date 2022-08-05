@@ -22,14 +22,14 @@ function FilmScreen ({films, reviews}: FilmScreenProps): JSX.Element {
   const { filmId } = useParams<FilmId>();
   const filmIndex = Number(filmId) - 1;
 
-  const {name, genre, released, posterImage} = films[filmIndex];
+  const {name, genre, released, posterImage, backgroundImage, backgroundColor} = films[filmIndex];
 
   return (
     <>
-      <section className="film-card film-card--full">
+      <section className="film-card film-card--full" style={{background: backgroundColor}}>
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={backgroundImage} alt="The Grand Budapest Hotel" />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
