@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom';
 
-import { store } from '../../store';
+import { useAppDispatch } from '../../hooks';
+
 import { logoutAction } from '../../store/api-actions';
 
 function UserBlockLogout(): JSX.Element {
+  const dispatch = useAppDispatch();
+
   const handleClick = () => {
-    store.dispatch(logoutAction());
+    dispatch(logoutAction());
   };
 
   return (
