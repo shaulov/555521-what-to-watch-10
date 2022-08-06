@@ -20,9 +20,10 @@ type FilmId = {
 
 function FilmScreen ({films, reviews}: FilmScreenProps): JSX.Element {
   const { filmId } = useParams<FilmId>();
-  const filmIndex = Number(filmId) - 1;
 
-  const {name, genre, released, posterImage, backgroundImage, backgroundColor} = films[filmIndex];
+  const currentFilm = films.filter((film) => film.id === Number(filmId));
+
+  const {name, genre, released, posterImage, backgroundImage, backgroundColor} = currentFilm[0];
 
   return (
     <>
@@ -74,7 +75,7 @@ function FilmScreen ({films, reviews}: FilmScreenProps): JSX.Element {
               <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
 
-            <FilmCardNavigation currentFilm={films[filmIndex]} currentReview={reviews[filmIndex]}/>
+            <FilmCardNavigation currentFilm={currentFilm[0]} currentReview={reviews[0]}/>
 
           </div>
         </div>

@@ -12,11 +12,12 @@ import Screen404 from '../../pages/404-screen/404-screen';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import ScrollToTop from '../../components/scroll-to-top/scroll-to-top';
 import PrivateRoute from '../private-root/private-root';
+import ErrorMessage from '../../components/error-message/error-message';
 
 import ResetFilmList from '../../utils/resetFilmList';
 
 function App(): JSX.Element {
-  const { films, reviews, authorizationStatus, isDataLoaded } = useAppSelector((state) => state);
+  const { films, reviews, authorizationStatus, isDataLoaded, error } = useAppSelector((state) => state);
 
   if (!isDataLoaded) {
     return (
@@ -28,6 +29,7 @@ function App(): JSX.Element {
     <BrowserRouter>
       <ScrollToTop />
       <ResetFilmList />
+      {error && <ErrorMessage />}
       <Routes>
         <Route
           path={AppRoute.Root}
