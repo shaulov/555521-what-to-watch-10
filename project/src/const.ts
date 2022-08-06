@@ -7,6 +7,12 @@ export enum AppRoute {
   Review = 'review',
 }
 
+export enum APIRoute {
+  Films = '/films',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
@@ -28,3 +34,5 @@ export const PREVIEW_ACTIVATION_TIME = 1000;
 export const COUNT_REVIEWS_IN_COL = 3;
 
 export const SHORT_STAIRS_NUMBER = 3;
+
+export const TIMEOUT_SHOW_ERROR = 3000;

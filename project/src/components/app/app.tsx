@@ -1,5 +1,6 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
+import { useAppSelector } from '../../hooks';
 
 import MainScreen from '../../pages/main-screen/main-screen';
 import FilmScreen from '../../pages/film-screen/film-screen';
@@ -8,23 +9,27 @@ import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import Screen404 from '../../pages/404-screen/404-screen';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import ScrollToTop from '../../components/scroll-to-top/scroll-to-top';
+import PrivateRoute from '../private-root/private-root';
+import ErrorMessage from '../../components/error-message/error-message';
+
 import ResetFilmList from '../../utils/resetFilmList';
 
-import PrivateRoute from '../private-root/private-root';
+function App(): JSX.Element {
+  const { films, reviews, authorizationStatus, isDataLoaded, error } = useAppSelector((state) => state);
 
-import { Film, FilmReview } from '../../types/film';
+  if (!isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
-type AppScreenProps = {
-  films: Film[],
-  reviews: FilmReview[],
-}
-
-function App({films, reviews}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <ScrollToTop />
       <ResetFilmList />
+      {error && <ErrorMessage />}
       <Routes>
         <Route
           path={AppRoute.Root}
@@ -50,7 +55,7 @@ function App({films, reviews}: AppScreenProps): JSX.Element {
         <Route
           path={AppRoute.MyList}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <PrivateRoute authorizationStatus={authorizationStatus}>
               <MyListScreen films={films}/>
             </PrivateRoute>
           }

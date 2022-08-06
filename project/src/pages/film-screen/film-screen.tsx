@@ -20,16 +20,17 @@ type FilmId = {
 
 function FilmScreen ({films, reviews}: FilmScreenProps): JSX.Element {
   const { filmId } = useParams<FilmId>();
-  const filmIndex = Number(filmId) - 1;
 
-  const {name, genre, releaseDate, poster} = films[filmIndex];
+  const currentFilm = films.filter((film) => film.id === Number(filmId));
+
+  const {name, genre, released, posterImage, backgroundImage, backgroundColor} = currentFilm[0];
 
   return (
     <>
-      <section className="film-card film-card--full">
+      <section className="film-card film-card--full" style={{background: backgroundColor}}>
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={backgroundImage} alt="The Grand Budapest Hotel" />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -45,7 +46,7 @@ function FilmScreen ({films, reviews}: FilmScreenProps): JSX.Element {
               <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{releaseDate}</span>
+                <span className="film-card__year">{released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -71,10 +72,10 @@ function FilmScreen ({films, reviews}: FilmScreenProps): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={poster} alt={`${name} poster`} width="218" height="327" />
+              <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
 
-            <FilmCardNavigation currentFilm={films[filmIndex]} currentReview={reviews[filmIndex]}/>
+            <FilmCardNavigation currentFilm={currentFilm[0]} currentReview={reviews[0]}/>
 
           </div>
         </div>

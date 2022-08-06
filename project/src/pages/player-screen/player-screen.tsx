@@ -5,11 +5,11 @@ type PlayerScreenProps = {
 }
 
 function PlayerScreen ({film}: PlayerScreenProps): JSX.Element {
-  const { name, video } = film;
+  const { name, videoLink } = film;
 
   return (
     <div className="player">
-      <video src={video} className="player__video" poster="img/player-poster.jpg"></video>
+      <video src={videoLink} className="player__video" poster="img/player-poster.jpg"></video>
 
       <button type="button" className="player__exit">Exit</button>
 

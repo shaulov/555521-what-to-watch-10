@@ -12,7 +12,7 @@ type SingleFilmCardProps = {
 }
 
 function SingleFilmCard ({ film }: SingleFilmCardProps) : JSX.Element {
-  const { id, name, poster } = film;
+  const { id, name, posterImage } = film;
 
   const [isPlayer, setPlayer] = useState(false);
 
@@ -26,7 +26,7 @@ function SingleFilmCard ({ film }: SingleFilmCardProps) : JSX.Element {
         {
           isPlayer ?
             <VideoPlayer film={film}/> :
-            <img src={poster} alt={name} width="280" height="175" />
+            <img src={posterImage} alt={name} width="280" height="175" />
         }
       </div>
       <h3 className="small-film-card__title">

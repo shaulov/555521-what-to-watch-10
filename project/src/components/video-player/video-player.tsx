@@ -21,9 +21,9 @@ function VideoPlayer({film}: VideoPlayerProps) : JSX.Element {
 
   return(
     <video
-      src={film.video}
+      src={film.previewVideoLink}
       className="player__video"
-      poster={film.poster}
+      poster={film.posterImage}
       ref={videoRef}
       muted
       loop

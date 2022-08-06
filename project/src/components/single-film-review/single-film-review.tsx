@@ -9,8 +9,10 @@ type SingleFilmReviewProps = {
 function SingleFilmReview({review}: SingleFilmReviewProps): JSX.Element {
   const { author, reviewDate, rating, content } = review;
 
-  const date = `${MONTH[reviewDate.getMonth()]} ${reviewDate.getDate()}, ${reviewDate.getFullYear()}`;
-  const dateTime = `${reviewDate.getFullYear()}-${reviewDate.getMonth() + 1}-${reviewDate.getDate()}`;
+  const formatedDate = new Date(reviewDate);
+
+  const date = `${MONTH[formatedDate.getMonth()]} ${formatedDate.getDate()}, ${formatedDate.getFullYear()}`;
+  const dateTime = `${formatedDate.getFullYear()}-${formatedDate.getMonth() + 1}-${formatedDate.getDate()}`;
 
   return(
     <div className="review">

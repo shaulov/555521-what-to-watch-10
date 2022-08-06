@@ -13,13 +13,13 @@ type MyListScreenProps = {
 }
 
 function AddReviewScreen ({film}: MyListScreenProps): JSX.Element {
-  const { id, name, poster, background } = film;
+  const { id, name, posterImage, backgroundImage } = film;
 
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={background} alt="The Grand Budapest Hotel" />
+          <img src={backgroundImage} alt="The Grand Budapest Hotel" />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -42,7 +42,7 @@ function AddReviewScreen ({film}: MyListScreenProps): JSX.Element {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src={poster} alt={`${name} poster`} width="218" height="327" />
+          <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
         </div>
       </div>
 
