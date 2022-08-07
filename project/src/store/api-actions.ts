@@ -1,5 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { StatusCodes } from 'http-status-codes';
+
 import { AppDispatch, State } from '../types/state';
 import { Films } from '../types/film';
 import { loadFilms,requireAuthorization, setDataLoadedStatus, setError } from './action';
@@ -41,8 +43,14 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   'user/checkAuth',
   async (_arg, {dispatch, extra: api}) => {
     try {
-      await api.get(APIRoute.Login);
-      dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      await api.get(APIRoute.Login)
+        .then((response) => {
+          if (response && response.status === StatusCodes.OK) {
+            dispatch(requireAuthorization(AuthorizationStatus.Auth));
+          } else {
+            dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+          }
+        });
     } catch {
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     }

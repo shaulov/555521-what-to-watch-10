@@ -15,11 +15,12 @@ import PrivateRoute from '../private-root/private-root';
 import ErrorMessage from '../../components/error-message/error-message';
 
 import ResetFilmList from '../../utils/resetFilmList';
+import { isCheckedAuth } from '../../utils/isCheckedAuth';
 
 function App(): JSX.Element {
   const { films, reviews, authorizationStatus, isDataLoaded, error } = useAppSelector((state) => state);
 
-  if (!isDataLoaded) {
+  if (!isDataLoaded || isCheckedAuth(authorizationStatus)) {
     return (
       <LoadingScreen />
     );
