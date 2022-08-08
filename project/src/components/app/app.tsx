@@ -1,4 +1,4 @@
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
 
@@ -14,6 +14,9 @@ import ScrollToTop from '../../components/scroll-to-top/scroll-to-top';
 import PrivateRoute from '../private-root/private-root';
 import ErrorMessage from '../../components/error-message/error-message';
 
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
+
 import ResetFilmList from '../../utils/resetFilmList';
 import { isCheckedAuth } from '../../utils/isCheckedAuth';
 
@@ -27,7 +30,7 @@ function App(): JSX.Element {
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <ScrollToTop />
       <ResetFilmList />
       {error && <ErrorMessage />}
@@ -70,7 +73,7 @@ function App(): JSX.Element {
           element={<Screen404 />}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 
