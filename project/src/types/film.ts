@@ -19,16 +19,3 @@ export type Film = {
 }
 
 export type Films = Film[];
-
-export type SingleReview = {
-  id: string,
-  author: string,
-  reviewDate: string,
-  rating: number,
-  content: string,
-}
-
-export type FilmReview = {
-  filmId: string,
-  review: SingleReview[],
-}
