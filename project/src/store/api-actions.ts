@@ -5,9 +5,9 @@ import { StatusCodes } from 'http-status-codes';
 import { AppDispatch, State } from '../types/state';
 import { Film, Films } from '../types/film';
 import { Reviews } from '../types/review';
-import { loadFilms, loadCurrentFilm, loadSimilarFilms, loadReviews, setDataLoadedStatus, requireAuthorization, setError } from './action';
+import { loadFilms, loadCurrentFilm, loadSimilarFilms, loadReviews, setDataLoadedStatus, requireAuthorization, setError, redirectToRoute } from './action';
 import { saveToken, dropToken } from '../services/token';
-import { APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
+import { AppRoute, APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { store } from './';
@@ -54,7 +54,7 @@ export const fetchCurrentFilmAction = createAsyncThunk<void, string, {
       dispatch(setDataLoadedStatus(true));
     } catch {
       dispatch(setDataLoadedStatus(true));
-      // dispatch(redirectToRoute(AppRoute.Root));
+      dispatch(redirectToRoute(AppRoute.Root));
     }
   }
 );
