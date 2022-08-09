@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { useAppSelector} from '../../hooks';
 
@@ -10,6 +10,8 @@ import FilmCardNavigation from '../../components/film-card-navigation/film-card-
 import { AppRoute, AuthorizationStatus, SIMILAR_FILMS_COUNT } from '../../const';
 
 function FilmScreen (): JSX.Element {
+  const { filmId } = useParams();
+
   const currentFilm = useAppSelector((state) => state.currentFilm);
   const currentReviews = useAppSelector((state) => state.reviews);
   const similarFilms = useAppSelector((state) => state.similarFilms);
@@ -57,7 +59,7 @@ function FilmScreen (): JSX.Element {
                 </button>
                 {
                   authorizationStatus === AuthorizationStatus.Auth
-                    ? <Link to={AppRoute.Review} className="btn film-card__button">Add review</Link>
+                    ? <Link to={`${AppRoute.Film}/${filmId}${AppRoute.AddReview}`} className="btn film-card__button">Add review</Link>
                     : null
                 }
               </div>

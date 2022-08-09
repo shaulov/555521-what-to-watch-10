@@ -45,12 +45,15 @@ function App(): JSX.Element {
           <Route
             path=":filmId"
             element={<FilmScreen />}
-          >
-            <Route
-              path={AppRoute.Review}
-              element={<AddReviewScreen film={films[0]} />}
-            />
-          </Route>
+          />
+          <Route
+            path={`:filmId${AppRoute.AddReview}`}
+            element={
+              <PrivateRoute authorizationStatus={authorizationStatus}>
+                <AddReviewScreen />
+              </PrivateRoute>
+            }
+          />
         </Route>
         <Route
           path={AppRoute.Player}

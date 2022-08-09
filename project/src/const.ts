@@ -4,7 +4,7 @@ export enum AppRoute {
   Root = '/',
   MyList = '/mylist',
   Player = '/player/:id',
-  Review = 'review',
+  AddReview = '/review',
 }
 
 export enum APIRoute {
