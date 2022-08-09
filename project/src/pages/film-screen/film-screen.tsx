@@ -7,12 +7,13 @@ import UserBlock from '../../components/user-block/user-block';
 import FilmsList from '../../components/films-list/films-list';
 import FilmCardNavigation from '../../components/film-card-navigation/film-card-navigation';
 
-import { AppRoute, SIMILAR_FILMS_COUNT } from '../../const';
+import { AppRoute, AuthorizationStatus, SIMILAR_FILMS_COUNT } from '../../const';
 
 function FilmScreen (): JSX.Element {
   const currentFilm = useAppSelector((state) => state.currentFilm);
   const currentReviews = useAppSelector((state) => state.reviews);
   const similarFilms = useAppSelector((state) => state.similarFilms);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   const {name, genre, released, posterImage, backgroundImage, backgroundColor} = currentFilm;
 
@@ -54,7 +55,11 @@ function FilmScreen (): JSX.Element {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <Link to={AppRoute.Review} className="btn film-card__button">Add review</Link>
+                {
+                  authorizationStatus === AuthorizationStatus.Auth
+                    ? <Link to={AppRoute.Review} className="btn film-card__button">Add review</Link>
+                    : null
+                }
               </div>
             </div>
           </div>
