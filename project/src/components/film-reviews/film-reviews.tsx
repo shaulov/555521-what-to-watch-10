@@ -2,8 +2,6 @@ import SingleFilmReview from '../single-film-review/single-film-review';
 
 import { Reviews } from '../../types/review';
 
-import { COUNT_REVIEWS_IN_COL } from '../../const';
-
 type SingleReviewCardProps = {
   filmReviews: Reviews;
 }
@@ -17,10 +15,10 @@ function FilmReviews({filmReviews}: SingleReviewCardProps): JSX.Element {
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {reviewContent.slice(0, COUNT_REVIEWS_IN_COL)}
+        {reviewContent.slice(0, reviewContent.length / 2)}
       </div>
       <div className="film-card__reviews-col">
-        { reviewContent.slice(COUNT_REVIEWS_IN_COL, COUNT_REVIEWS_IN_COL * 2) }
+        { reviewContent.slice(reviewContent.length / 2, reviewContent.length) }
       </div>
     </div>
   );

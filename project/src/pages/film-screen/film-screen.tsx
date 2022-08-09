@@ -1,30 +1,20 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+import { useAppSelector} from '../../hooks';
 
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import FilmsList from '../../components/films-list/films-list';
 import FilmCardNavigation from '../../components/film-card-navigation/film-card-navigation';
 
-import { AppRoute } from '../../const';
+import { AppRoute, SIMILAR_FILMS_COUNT } from '../../const';
 
-import { Films } from '../../types/film';
-import { Reviews } from '../../types/review';
+function FilmScreen (): JSX.Element {
+  const currentFilm = useAppSelector((state) => state.currentFilm);
+  const currentReviews = useAppSelector((state) => state.reviews);
+  const similarFilms = useAppSelector((state) => state.similarFilms);
 
-type FilmScreenProps = {
-  films: Films;
-  reviews: Reviews;
-}
-
-type FilmId = {
-  filmId: string;
-}
-
-function FilmScreen ({films, reviews}: FilmScreenProps): JSX.Element {
-  const { filmId } = useParams<FilmId>();
-
-  const currentFilm = films.filter((film) => film.id === Number(filmId));
-
-  const {name, genre, released, posterImage, backgroundImage, backgroundColor} = currentFilm[0];
+  const {name, genre, released, posterImage, backgroundImage, backgroundColor} = currentFilm;
 
   return (
     <>
@@ -76,7 +66,7 @@ function FilmScreen ({films, reviews}: FilmScreenProps): JSX.Element {
               <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
 
-            <FilmCardNavigation currentFilm={currentFilm[0]} currentReview={reviews}/>
+            <FilmCardNavigation currentFilm={currentFilm} currentReview={currentReviews}/>
 
           </div>
         </div>
@@ -86,7 +76,7 @@ function FilmScreen ({films, reviews}: FilmScreenProps): JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <FilmsList films={films} />
+          <FilmsList films={similarFilms.length > SIMILAR_FILMS_COUNT ? similarFilms.slice(0, SIMILAR_FILMS_COUNT) : similarFilms} />
         </section>
 
         <footer className="page-footer">

@@ -21,7 +21,7 @@ import ResetFilmList from '../../utils/resetFilmList';
 import { isCheckedAuth } from '../../utils/isCheckedAuth';
 
 function App(): JSX.Element {
-  const { films, reviews, authorizationStatus, isDataLoaded, error } = useAppSelector((state) => state);
+  const { films, authorizationStatus, isDataLoaded, error } = useAppSelector((state) => state);
 
   if (!isDataLoaded || isCheckedAuth(authorizationStatus)) {
     return (
@@ -44,7 +44,7 @@ function App(): JSX.Element {
         >
           <Route
             path=":filmId"
-            element={<FilmScreen films={films} reviews={reviews}/>}
+            element={<FilmScreen />}
           >
             <Route
               path={AppRoute.Review}
