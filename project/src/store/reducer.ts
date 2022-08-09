@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeGenre, getFilmList, showMoreFilms, loadFilms, loadCurrentFilm, loadSimilarFilms, loadReviews, setDataLoadedStatus, requireAuthorization, setError } from './action';
+import { changeGenre, getFilmList, showMoreFilms, loadFilms, loadCurrentFilm, loadSimilarFilms, loadReviews, postReview, setDataLoadedStatus, requireAuthorization, setError } from './action';
 import { Film, Films } from '../types/film';
 import { Reviews } from '../types/review';
 
@@ -56,6 +56,9 @@ export const reducer = createReducer(initialState, (builder) => {
       state.isDataLoaded = action.payload;
     })
     .addCase(loadReviews, (state, action) => {
+      state.reviews = action.payload;
+    })
+    .addCase(postReview, (state, action) => {
       state.reviews = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {

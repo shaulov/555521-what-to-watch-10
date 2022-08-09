@@ -4,8 +4,8 @@ import { StatusCodes } from 'http-status-codes';
 
 import { AppDispatch, State } from '../types/state';
 import { Film, Films } from '../types/film';
-import { Reviews } from '../types/review';
-import { loadFilms, loadCurrentFilm, loadSimilarFilms, loadReviews, setDataLoadedStatus, requireAuthorization, setError, redirectToRoute } from './action';
+import { Reviews, UserReview } from '../types/review';
+import { loadFilms, loadCurrentFilm, loadSimilarFilms, loadReviews, postReview, setDataLoadedStatus, requireAuthorization, setError, redirectToRoute } from './action';
 import { saveToken, dropToken } from '../services/token';
 import { AppRoute, APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
 import { AuthData } from '../types/auth-data';
@@ -56,6 +56,18 @@ export const fetchCurrentFilmAction = createAsyncThunk<void, string, {
       dispatch(setDataLoadedStatus(true));
       dispatch(redirectToRoute(AppRoute.Root));
     }
+  }
+);
+
+export const postReviewAction = createAsyncThunk<void, UserReview, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'data/postReview',
+  async ({comment, rating, filmId}, {dispatch, extra: api}) => {
+    const {data} = await api.post<Reviews>(`${APIRoute.Reviews}/${filmId}`, {comment, rating});
+    dispatch(postReview(data));
   }
 );
 

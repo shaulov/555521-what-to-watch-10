@@ -17,6 +17,8 @@ export const loadSimilarFilms = createAction<Films>('data/loadSimilarFilms');
 
 export const loadReviews = createAction<Reviews>('data/loadReviews');
 
+export const postReview = createAction<Reviews>('data/postReview');
+
 export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
