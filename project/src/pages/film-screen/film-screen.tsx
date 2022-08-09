@@ -7,11 +7,12 @@ import FilmCardNavigation from '../../components/film-card-navigation/film-card-
 
 import { AppRoute } from '../../const';
 
-import { Film, FilmReview } from '../../types/film';
+import { Films } from '../../types/film';
+import { Reviews } from '../../types/review';
 
 type FilmScreenProps = {
-  films: Film[];
-  reviews: FilmReview[];
+  films: Films;
+  reviews: Reviews;
 }
 
 type FilmId = {
@@ -75,7 +76,7 @@ function FilmScreen ({films, reviews}: FilmScreenProps): JSX.Element {
               <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
 
-            <FilmCardNavigation currentFilm={currentFilm[0]} currentReview={reviews[0]}/>
+            <FilmCardNavigation currentFilm={currentFilm[0]} currentReview={reviews}/>
 
           </div>
         </div>
