@@ -5,7 +5,7 @@ import { StatusCodes } from 'http-status-codes';
 import { AppDispatch, State } from '../types/state';
 import { Film, Films } from '../types/film';
 import { Reviews, UserReview } from '../types/review';
-import { loadFilms, loadCurrentFilm, loadSimilarFilms, loadReviews, postReview, setDataLoadedStatus, requireAuthorization, setError, redirectToRoute } from './action';
+import { loadFilms, loadCurrentFilm, loadSimilarFilms, loadReviews, postReview, setFilmsDataLoadedStatus, setCurrentFilmDataLoadedStatus, requireAuthorization, setError, redirectToRoute } from './action';
 import { saveToken, dropToken } from '../services/token';
 import { AppRoute, APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
 import { AuthData } from '../types/auth-data';
@@ -30,13 +30,13 @@ export const fetchFilmAction = createAsyncThunk<void, undefined, {
   'data/fetchFilms',
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<Films>(APIRoute.Films);
-    dispatch(setDataLoadedStatus(false));
+    dispatch(setFilmsDataLoadedStatus(false));
     dispatch(loadFilms(data));
-    dispatch(setDataLoadedStatus(true));
+    dispatch(setFilmsDataLoadedStatus(true));
   },
 );
 
-export const fetchCurrentFilmAction = createAsyncThunk<void, string, {
+export const fetchCurrentFilmAction = createAsyncThunk<void, string | undefined, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
@@ -44,16 +44,16 @@ export const fetchCurrentFilmAction = createAsyncThunk<void, string, {
   'data/fetchCurrentFilm',
   async (id, {dispatch, extra: api}) => {
     try {
-      dispatch(setDataLoadedStatus(false));
+      dispatch(setCurrentFilmDataLoadedStatus(false));
       const {data: currentFilm} = await api.get<Film>(`${APIRoute.Films}/${id}`);
       const {data: similarFilms} = await api.get<Films>(`${APIRoute.Films}/${id}/similar`);
       const {data: reviews} = await api.get<Reviews>(`${APIRoute.Reviews}/${id}`);
       dispatch(loadCurrentFilm(currentFilm));
       dispatch(loadSimilarFilms(similarFilms));
       dispatch(loadReviews(reviews));
-      dispatch(setDataLoadedStatus(true));
+      dispatch(setCurrentFilmDataLoadedStatus(true));
     } catch {
-      dispatch(setDataLoadedStatus(true));
+      dispatch(setCurrentFilmDataLoadedStatus(true));
       dispatch(redirectToRoute(AppRoute.Root));
     }
   }

@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useAppDispatch } from '../../hooks';
-import { fetchCurrentFilmAction } from '../../store/api-actions';
-
 import { Film } from '../../types/film';
 
 import VideoPlayer from '../video-player/video-player';
@@ -19,12 +16,6 @@ function SingleFilmCard ({ film }: SingleFilmCardProps) : JSX.Element {
   const { id, name, posterImage } = film;
 
   const [isPlayer, setPlayer] = useState(false);
-
-  const dispatch = useAppDispatch();
-
-  const handleFilmCardClick = async () => {
-    await dispatch(fetchCurrentFilmAction(id.toString()));
-  };
 
   return (
     <article
@@ -43,7 +34,6 @@ function SingleFilmCard ({ film }: SingleFilmCardProps) : JSX.Element {
         <Link
           to={`${AppRoute.Film}/${id}`}
           className="small-film-card__link"
-          onClick={handleFilmCardClick}
         >{name}
         </Link>
       </h3>

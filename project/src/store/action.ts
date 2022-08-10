@@ -19,7 +19,9 @@ export const loadReviews = createAction<Reviews>('data/loadReviews');
 
 export const postReview = createAction<Reviews>('data/postReview');
 
-export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
+export const setFilmsDataLoadedStatus = createAction<boolean>('data/setFilmsDataLoadedStatus');
+
+export const setCurrentFilmDataLoadedStatus = createAction<boolean>('data/setCurrentFilmDataLoadedStatus');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 

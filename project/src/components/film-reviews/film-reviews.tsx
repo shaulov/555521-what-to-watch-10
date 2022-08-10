@@ -8,17 +8,17 @@ type SingleReviewCardProps = {
 
 function FilmReviews({filmReviews}: SingleReviewCardProps): JSX.Element {
 
-  const reviewContent = filmReviews.map((filmReview) => (
+  const reviews = filmReviews.map((filmReview) => (
     <SingleFilmReview review={filmReview} key={filmReview.id} />
   ));
 
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {reviewContent.slice(0, reviewContent.length / 2)}
+        {reviews.slice(0, reviews.length / 2)}
       </div>
       <div className="film-card__reviews-col">
-        { reviewContent.slice(reviewContent.length / 2, reviewContent.length) }
+        { reviews.slice(reviews.length / 2, reviews.length) }
       </div>
     </div>
   );

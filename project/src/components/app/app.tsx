@@ -21,9 +21,9 @@ import ResetFilmList from '../../utils/resetFilmList';
 import { isCheckedAuth } from '../../utils/isCheckedAuth';
 
 function App(): JSX.Element {
-  const { films, authorizationStatus, isDataLoaded, error } = useAppSelector((state) => state);
+  const { films, authorizationStatus, isFilmsDataLoaded, error } = useAppSelector((state) => state);
 
-  if (!isDataLoaded || isCheckedAuth(authorizationStatus)) {
+  if (!isFilmsDataLoaded || isCheckedAuth(authorizationStatus)) {
     return (
       <LoadingScreen />
     );

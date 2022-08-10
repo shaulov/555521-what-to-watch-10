@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, ChangeEvent, FormEvent } from 'react';
 
 import { useParams } from 'react-router-dom';
 
@@ -9,8 +9,8 @@ import { redirectToRoute } from '../../store/action';
 
 import { AppRoute, MIN_REVIEW_LENGTH, MAX_REVIEW_LENGTH } from '../../const';
 
-type formEvent = React.FormEvent<HTMLFormElement> & {target: {tagName: string; value: string & number}};
-type formSubmit = React.FormEvent<HTMLFormElement>;
+type changeEvent = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
+type formSubmit = FormEvent<HTMLFormElement>;
 
 function ReviewForm(): JSX.Element {
   const { filmId } = useParams();
@@ -25,14 +25,9 @@ function ReviewForm(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const handleFormChange = (evt: formEvent) => {
-    if (evt.target.tagName === 'INPUT') {
-      setUserReview({...userReview, rating: evt.target.value, filmId: Number(filmId)});
-    }
-
-    if(evt.target.tagName === 'TEXTAREA') {
-      setUserReview({...userReview, comment: evt.target.value, filmId: Number(filmId)});
-    }
+  const handleChange = (evt: changeEvent) => {
+    const {value, name} = evt.target;
+    setUserReview({...userReview, [name]: value, filmId: Number(filmId)});
   };
 
   const handleFormSubmit = async (evt: formSubmit) => {
@@ -41,18 +36,16 @@ function ReviewForm(): JSX.Element {
     setUploadingReview(true);
 
     const requestStatus = await dispatch(postReviewAction(userReview));
-    if (requestStatus.meta.requestStatus === 'rejected') {
-      return;
+    if (requestStatus.meta.requestStatus !== 'rejected') {
+      dispatch(redirectToRoute(`${AppRoute.Film}/${userReview.filmId}`));
     }
-
-    dispatch(redirectToRoute(`${AppRoute.Film}/${userReview.filmId}`));
   };
 
   const ratingStars: JSX.Element[] = Array.from({length: 10}, (_, index) => index + 1)
     .reverse()
     .map((number) => (
       <Fragment key={number}>
-        <input className="rating__input" id={`star-${number}`} type="radio" name="rating" value={number} />
+        <input onChange={handleChange} className="rating__input" id={`star-${number}`} type="radio" name="rating" value={number} />
         <label className="rating__label" htmlFor={`star-${number}`}>Rating {number}</label>
       </Fragment>
     ));
@@ -67,7 +60,6 @@ function ReviewForm(): JSX.Element {
     <form
       action="#"
       className="add-review__form"
-      onChange={handleFormChange}
       onSubmit={handleFormSubmit}
     >
       <div className="rating">
@@ -79,9 +71,10 @@ function ReviewForm(): JSX.Element {
       <div className="add-review__text">
         <textarea
           className="add-review__textarea"
-          name="review-text"
+          name="comment"
           id="review-text"
           placeholder="Review text"
+          onChange={handleChange}
         />
         <div className="add-review__submit">
           <button

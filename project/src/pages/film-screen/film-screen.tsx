@@ -1,21 +1,34 @@
+import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import { useAppSelector} from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+
+import { fetchCurrentFilmAction } from '../../store/api-actions';
 
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import FilmsList from '../../components/films-list/films-list';
 import FilmCardNavigation from '../../components/film-card-navigation/film-card-navigation';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 import { AppRoute, AuthorizationStatus, SIMILAR_FILMS_COUNT } from '../../const';
 
 function FilmScreen (): JSX.Element {
   const { filmId } = useParams();
 
-  const currentFilm = useAppSelector((state) => state.currentFilm);
-  const currentReviews = useAppSelector((state) => state.reviews);
-  const similarFilms = useAppSelector((state) => state.similarFilms);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const { currentFilm, reviews, similarFilms, authorizationStatus, isCurrentFilmDataLoaded } = useAppSelector((state) => state);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCurrentFilmAction(filmId));
+  }, [filmId]);
+
+  if (!isCurrentFilmDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   const {name, genre, released, posterImage, backgroundImage, backgroundColor} = currentFilm;
 
@@ -59,8 +72,7 @@ function FilmScreen (): JSX.Element {
                 </button>
                 {
                   authorizationStatus === AuthorizationStatus.Auth
-                    ? <Link to={`${AppRoute.Film}/${filmId}${AppRoute.AddReview}`} className="btn film-card__button">Add review</Link>
-                    : null
+                    && <Link to={`${AppRoute.Film}/${filmId}${AppRoute.AddReview}`} className="btn film-card__button">Add review</Link>
                 }
               </div>
             </div>
@@ -73,7 +85,7 @@ function FilmScreen (): JSX.Element {
               <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
 
-            <FilmCardNavigation currentFilm={currentFilm} currentReview={currentReviews}/>
+            <FilmCardNavigation currentFilm={currentFilm} currentReview={reviews}/>
 
           </div>
         </div>
