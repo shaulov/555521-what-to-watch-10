@@ -10,6 +10,7 @@ import UserBlock from '../../components/user-block/user-block';
 import FilmsList from '../../components/films-list/films-list';
 import FilmCardNavigation from '../../components/film-card-navigation/film-card-navigation';
 import LoadingScreen from '../loading-screen/loading-screen';
+import Screen404 from '../404-screen/404-screen';
 
 import { AppRoute, AuthorizationStatus, SIMILAR_FILMS_COUNT } from '../../const';
 
@@ -27,6 +28,12 @@ function FilmScreen (): JSX.Element {
   if (!isCurrentFilmDataLoaded) {
     return (
       <LoadingScreen />
+    );
+  }
+
+  if (isCurrentFilmDataLoaded && Object.keys(currentFilm).length === 0) {
+    return (
+      <Screen404 />
     );
   }
 

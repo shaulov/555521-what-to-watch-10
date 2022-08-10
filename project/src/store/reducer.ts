@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeGenre, getFilmList, showMoreFilms, loadFilms, loadCurrentFilm, loadSimilarFilms, loadReviews, postReview, setFilmsDataLoadedStatus, setCurrentFilmDataLoadedStatus, requireAuthorization, setError } from './action';
+import { changeGenre, getFilmListByGenre, showMoreFilms, loadFilms, loadCurrentFilm, loadSimilarFilms, loadReviews, postReview, setFilmsDataLoadedStatus, setCurrentFilmDataLoadedStatus, requireAuthorization, setError } from './action';
 import { Film, Films } from '../types/film';
 import { Reviews } from '../types/review';
 
@@ -39,14 +39,15 @@ export const reducer = createReducer(initialState, (builder) => {
       state.genre = action.payload;
       state.filmsPerStep = FILMS_PER_STEP_COUNT;
     })
-    .addCase(getFilmList, (state) => {
-      state.films = state.genre === DEFAULT_GENRE ? state.films : state.films.filter((film) => film.genre === state.genre);
+    .addCase(getFilmListByGenre, (state) => {
+      state.filmsByGenre = state.genre === DEFAULT_GENRE ? state.films : state.films.filter((film) => film.genre === state.genre);
     })
     .addCase(showMoreFilms, (state, action) => {
       state.filmsPerStep = action.payload;
     })
     .addCase(loadFilms, (state, action) => {
       state.films = action.payload;
+      state.filmsByGenre = action.payload;
     })
     .addCase(loadCurrentFilm, (state, action) => {
       state.currentFilm = action.payload;

@@ -1,5 +1,5 @@
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import { changeGenre, getFilmList, showMoreFilms } from '../../store/action';
+import { changeGenre, getFilmListByGenre, showMoreFilms } from '../../store/action';
 
 import MainFilmCard from '../../components/main-film-card/main-film-card';
 import GenresList from '../../components/genres-list/genres-list';
@@ -10,24 +10,23 @@ import MoreButton from '../../components/more-button/more-button';
 import { GENRES, FILMS_PER_STEP_COUNT } from '../../const';
 
 function MainScreen (): JSX.Element {
-  const films = useAppSelector((state) => state.films);
-  const filmsPerStep = useAppSelector((state) => state.filmsPerStep);
+  const { films, filmsPerStep, filmsByGenre } = useAppSelector((state) => state);
 
   const dispatch = useAppDispatch();
 
   const onFilterChange = (genre: string) => {
     dispatch(changeGenre(genre));
-    dispatch(getFilmList());
+    dispatch(getFilmListByGenre());
   };
 
   const onShowMoreButtonClick = () => {
-    const newFilmsPerStep = Math.min(films.length, filmsPerStep + FILMS_PER_STEP_COUNT);
+    const newFilmsPerStep = Math.min(filmsByGenre.length, filmsPerStep + FILMS_PER_STEP_COUNT);
     dispatch(showMoreFilms(newFilmsPerStep));
   };
 
   return (
     <>
-      <MainFilmCard film={films[0]}/>
+      <MainFilmCard film={ filmsByGenre.length > 0 ? filmsByGenre[0] : films[0] }/>
 
       <div className="page-content">
 
@@ -36,9 +35,9 @@ function MainScreen (): JSX.Element {
 
           <GenresList genres={GENRES} onFilterChange={onFilterChange} />
 
-          <FilmsList films={films.slice(0, filmsPerStep)} />
+          <FilmsList films={filmsByGenre.slice(0, filmsPerStep)} />
 
-          {filmsPerStep < films.length && <MoreButton onShowMoreButtonClick={onShowMoreButtonClick} />}
+          {filmsPerStep < filmsByGenre.length && <MoreButton onShowMoreButtonClick={onShowMoreButtonClick} />}
         </section>
 
         <footer className="page-footer">

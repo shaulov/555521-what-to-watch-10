@@ -5,7 +5,7 @@ import { AuthorizationStatus } from '../const';
 
 export const changeGenre = createAction<string>('film/changeGenre');
 
-export const getFilmList = createAction('film/getFilmList');
+export const getFilmListByGenre = createAction('film/getFilmListByGenre');
 
 export const showMoreFilms = createAction<number>('film/showMoreFilms');
 
