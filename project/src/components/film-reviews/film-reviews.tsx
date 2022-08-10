@@ -1,27 +1,24 @@
 import SingleFilmReview from '../single-film-review/single-film-review';
 
-import { FilmReview } from '../../types/film';
-
-import { COUNT_REVIEWS_IN_COL } from '../../const';
+import { Reviews } from '../../types/review';
 
 type SingleReviewCardProps = {
-  filmReviews: FilmReview;
+  filmReviews: Reviews;
 }
 
 function FilmReviews({filmReviews}: SingleReviewCardProps): JSX.Element {
-  const {review} = filmReviews;
 
-  const reviewContent = review.map((filmReview) => (
+  const reviews = filmReviews.map((filmReview) => (
     <SingleFilmReview review={filmReview} key={filmReview.id} />
   ));
 
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {reviewContent.slice(0, COUNT_REVIEWS_IN_COL)}
+        {reviews.slice(0, reviews.length / 2)}
       </div>
       <div className="film-card__reviews-col">
-        { reviewContent.slice(COUNT_REVIEWS_IN_COL, COUNT_REVIEWS_IN_COL * 2) }
+        { reviews.slice(reviews.length / 2, reviews.length) }
       </div>
     </div>
   );

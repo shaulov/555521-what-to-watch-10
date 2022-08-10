@@ -1,22 +1,39 @@
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+
+import { useAppSelector, useAppDispatch } from '../../hooks';
+
+import { fetchCurrentFilmAction } from '../../store/api-actions';
 
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import ReviewForm from '../../components/review-form/review-form';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 import { AppRoute } from '../../const';
 
-import { Film } from '../../types/film';
+function AddReviewScreen (): JSX.Element {
 
-type MyListScreenProps = {
-  film: Film,
-}
+  const { filmId } = useParams();
 
-function AddReviewScreen ({film}: MyListScreenProps): JSX.Element {
-  const { id, name, posterImage, backgroundImage } = film;
+  const { currentFilm, isCurrentFilmDataLoaded } = useAppSelector((state) => state);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCurrentFilmAction(filmId));
+  }, [filmId]);
+
+  if (!isCurrentFilmDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
+  const { id, name, posterImage, backgroundImage } = currentFilm;
 
   return (
-    <section className="film-card film-card--full">
+    <section className="film-card film-card--full" >
       <div className="film-card__header">
         <div className="film-card__bg">
           <img src={backgroundImage} alt="The Grand Budapest Hotel" />
@@ -33,7 +50,7 @@ function AddReviewScreen ({film}: MyListScreenProps): JSX.Element {
                 <Link to={`${AppRoute.Film}/${id}`} className="breadcrumbs__link">{name}</Link>
               </li>
               <li className="breadcrumbs__item">
-                <a className="breadcrumbs__link">Add review</a>
+                <Link to={`${AppRoute.Film}/${id}${AppRoute.AddReview}`} className="breadcrumbs__link">Add review</Link>
               </li>
             </ul>
           </nav>

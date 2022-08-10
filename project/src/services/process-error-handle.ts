@@ -1,9 +1,17 @@
 import { store } from '../store';
-import { setError } from '../store/action';
+import { setError, redirectToRoute } from '../store/action';
 import { clearErrorAction } from '../store/api-actions';
 
+import { StatusCodes } from 'http-status-codes';
 
-export const processErrorHandle = (message: string): void => {
+import { AppRoute } from '../const';
+
+
+export const processErrorHandle = (message: string, status: number): void => {
+  if (status !== StatusCodes.NOT_FOUND) {
+    store.dispatch(redirectToRoute(AppRoute.Root));
+  }
+
   store.dispatch(setError(message));
   store.dispatch(clearErrorAction());
 };

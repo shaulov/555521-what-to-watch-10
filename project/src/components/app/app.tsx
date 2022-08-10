@@ -1,4 +1,4 @@
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
 
@@ -14,20 +14,23 @@ import ScrollToTop from '../../components/scroll-to-top/scroll-to-top';
 import PrivateRoute from '../private-root/private-root';
 import ErrorMessage from '../../components/error-message/error-message';
 
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
+
 import ResetFilmList from '../../utils/resetFilmList';
 import { isCheckedAuth } from '../../utils/isCheckedAuth';
 
 function App(): JSX.Element {
-  const { films, reviews, authorizationStatus, isDataLoaded, error } = useAppSelector((state) => state);
+  const { films, authorizationStatus, isFilmsDataLoaded, error } = useAppSelector((state) => state);
 
-  if (!isDataLoaded || isCheckedAuth(authorizationStatus)) {
+  if (!isFilmsDataLoaded || isCheckedAuth(authorizationStatus)) {
     return (
       <LoadingScreen />
     );
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <ScrollToTop />
       <ResetFilmList />
       {error && <ErrorMessage />}
@@ -41,13 +44,16 @@ function App(): JSX.Element {
         >
           <Route
             path=":filmId"
-            element={<FilmScreen films={films} reviews={reviews}/>}
-          >
-            <Route
-              path={AppRoute.Review}
-              element={<AddReviewScreen film={films[0]} />}
-            />
-          </Route>
+            element={<FilmScreen />}
+          />
+          <Route
+            path={`:filmId${AppRoute.AddReview}`}
+            element={
+              <PrivateRoute authorizationStatus={authorizationStatus}>
+                <AddReviewScreen />
+              </PrivateRoute>
+            }
+          />
         </Route>
         <Route
           path={AppRoute.Player}
@@ -70,7 +76,7 @@ function App(): JSX.Element {
           element={<Screen404 />}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

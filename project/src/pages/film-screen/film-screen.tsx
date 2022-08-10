@@ -1,29 +1,43 @@
+import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+
+import { useAppSelector, useAppDispatch } from '../../hooks';
+
+import { fetchCurrentFilmAction } from '../../store/api-actions';
 
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import FilmsList from '../../components/films-list/films-list';
 import FilmCardNavigation from '../../components/film-card-navigation/film-card-navigation';
+import LoadingScreen from '../loading-screen/loading-screen';
+import Screen404 from '../404-screen/404-screen';
 
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus, SIMILAR_FILMS_COUNT } from '../../const';
 
-import { Film, FilmReview } from '../../types/film';
+function FilmScreen (): JSX.Element {
+  const { filmId } = useParams();
 
-type FilmScreenProps = {
-  films: Film[];
-  reviews: FilmReview[];
-}
+  const { currentFilm, reviews, similarFilms, authorizationStatus, isCurrentFilmDataLoaded } = useAppSelector((state) => state);
 
-type FilmId = {
-  filmId: string;
-}
+  const dispatch = useAppDispatch();
 
-function FilmScreen ({films, reviews}: FilmScreenProps): JSX.Element {
-  const { filmId } = useParams<FilmId>();
+  useEffect(() => {
+    dispatch(fetchCurrentFilmAction(filmId));
+  }, [filmId]);
 
-  const currentFilm = films.filter((film) => film.id === Number(filmId));
+  if (!isCurrentFilmDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
-  const {name, genre, released, posterImage, backgroundImage, backgroundColor} = currentFilm[0];
+  if (isCurrentFilmDataLoaded && Object.keys(currentFilm).length === 0) {
+    return (
+      <Screen404 />
+    );
+  }
+
+  const {name, genre, released, posterImage, backgroundImage, backgroundColor} = currentFilm;
 
   return (
     <>
@@ -63,7 +77,10 @@ function FilmScreen ({films, reviews}: FilmScreenProps): JSX.Element {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <Link to={AppRoute.Review} className="btn film-card__button">Add review</Link>
+                {
+                  authorizationStatus === AuthorizationStatus.Auth
+                    && <Link to={`${AppRoute.Film}/${filmId}${AppRoute.AddReview}`} className="btn film-card__button">Add review</Link>
+                }
               </div>
             </div>
           </div>
@@ -75,7 +92,7 @@ function FilmScreen ({films, reviews}: FilmScreenProps): JSX.Element {
               <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
 
-            <FilmCardNavigation currentFilm={currentFilm[0]} currentReview={reviews[0]}/>
+            <FilmCardNavigation currentFilm={currentFilm} currentReview={reviews}/>
 
           </div>
         </div>
@@ -85,7 +102,7 @@ function FilmScreen ({films, reviews}: FilmScreenProps): JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <FilmsList films={films} />
+          <FilmsList films={similarFilms.length > SIMILAR_FILMS_COUNT ? similarFilms.slice(0, SIMILAR_FILMS_COUNT) : similarFilms} />
         </section>
 
         <footer className="page-footer">

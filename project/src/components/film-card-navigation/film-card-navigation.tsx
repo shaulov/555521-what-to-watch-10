@@ -5,11 +5,12 @@ import FilmDetails from '../film-details/film-details';
 import FilmReviews from '../film-reviews/film-reviews';
 import NavigationTabContent from '../navigation-tab-content/navigation-tab-content';
 
-import { Film, FilmReview } from '../../types/film';
+import { Film } from '../../types/film';
+import { Reviews } from '../../types/review';
 
 type FilmCardNavigationProps = {
   currentFilm: Film;
-  currentReview: FilmReview;
+  currentReview: Reviews;
 }
 
 function FilmCardNavigation({currentFilm, currentReview}: FilmCardNavigationProps) : JSX.Element {

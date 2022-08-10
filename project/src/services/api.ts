@@ -36,7 +36,7 @@ export const createApi = (): AxiosInstance => {
     (response) => response,
     (error: AxiosError) => {
       if (error.response && shouldDisplayError(error.response)) {
-        processErrorHandle(error.response.data.error);
+        processErrorHandle(error.response.data.error, error.response.status);
       }
     }
   );

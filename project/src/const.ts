@@ -4,11 +4,12 @@ export enum AppRoute {
   Root = '/',
   MyList = '/mylist',
   Player = '/player/:id',
-  Review = 'review',
+  AddReview = '/review',
 }
 
 export enum APIRoute {
   Films = '/films',
+  Reviews = '/comments',
   Login = '/login',
   Logout = '/logout',
 }
@@ -31,8 +32,10 @@ export const SIMILAR_FILMS_COUNT = 4;
 
 export const PREVIEW_ACTIVATION_TIME = 1000;
 
-export const COUNT_REVIEWS_IN_COL = 3;
-
 export const SHORT_STAIRS_NUMBER = 3;
 
 export const TIMEOUT_SHOW_ERROR = 3000;
+
+export const MIN_REVIEW_LENGTH = 50;
+
+export const MAX_REVIEW_LENGTH = 400;

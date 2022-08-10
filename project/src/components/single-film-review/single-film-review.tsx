@@ -1,27 +1,27 @@
-import { SingleReview } from '../../types/film';
+import { Review } from '../../types/review';
 
 import { MONTH } from '../../const';
 
 type SingleFilmReviewProps = {
-  review: SingleReview;
+  review: Review;
 }
 
 function SingleFilmReview({review}: SingleFilmReviewProps): JSX.Element {
-  const { author, reviewDate, rating, content } = review;
+  const { comment, date, rating, user } = review;
 
-  const formatedDate = new Date(reviewDate);
+  const formatedDate = new Date(date);
 
-  const date = `${MONTH[formatedDate.getMonth()]} ${formatedDate.getDate()}, ${formatedDate.getFullYear()}`;
+  const reviewDate = `${MONTH[formatedDate.getMonth()]} ${formatedDate.getDate()}, ${formatedDate.getFullYear()}`;
   const dateTime = `${formatedDate.getFullYear()}-${formatedDate.getMonth() + 1}-${formatedDate.getDate()}`;
 
   return(
     <div className="review">
       <blockquote className="review__quote">
-        <p className="review__text">{content}</p>
+        <p className="review__text">{comment}</p>
 
         <footer className="review__details">
-          <cite className="review__author">{author}</cite>
-          <time className="review__date" dateTime={dateTime}>{date}</time>
+          <cite className="review__author">{user.name}</cite>
+          <time className="review__date" dateTime={dateTime}>{reviewDate}</time>
         </footer>
       </blockquote>
 
