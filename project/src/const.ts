@@ -20,6 +20,13 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum NameSpace {
+  App = 'APP',
+  User = 'USER',
+  Data = 'DATA',
+  Film = 'FILM',
+}
+
 export const GENRES: readonly string[] = ['All genres', 'Comedies', 'Crime', 'Documentary', 'Drama', 'Horror', 'Kids & Family', 'Romance', 'Sci-Fi', 'Thriller'];
 
 export const DEFAULT_GENRE = 'All genres';
