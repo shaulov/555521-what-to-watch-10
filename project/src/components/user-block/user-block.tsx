@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useAppSelector } from '../../hooks';
 
 import UserBlockLogout from '../user-block-logout/user-block-logout';
@@ -15,4 +16,4 @@ function UserBlock(): JSX.Element {
   return <UserBlockLogin />;
 }
 
-export default UserBlock;
+export default memo(UserBlock);
