@@ -26,7 +26,7 @@ function MainScreen (): JSX.Element {
 
   return (
     <>
-      <MainFilmCard film={ filmsByGenre.length > 0 ? filmsByGenre[0] : films[0] }/>
+      <MainFilmCard film={ filmsByGenre.length ? filmsByGenre[0] : films[0] }/>
 
       <div className="page-content">
 
