@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { AppDispatch, State } from '../types/state';
 import { Film, Films } from '../types/film';
-import { Reviews, UserReview } from '../types/review';
+import { Review, Reviews, UserReview } from '../types/review';
 import { loadFilms, loadCurrentFilm, loadSimilarFilms, loadReviews, postReview, setFilmsDataLoadedStatus, setCurrentFilmDataLoadedStatus, setError } from './action';
 import { saveToken, dropToken } from '../services/token';
 import { APIRoute, TIMEOUT_SHOW_ERROR } from '../const';
@@ -21,7 +21,7 @@ export const clearErrorAction = createAsyncThunk(
   }
 );
 
-export const fetchFilmAction = createAsyncThunk<void, undefined, {
+export const fetchFilmAction = createAsyncThunk<Films, undefined, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
@@ -29,31 +29,22 @@ export const fetchFilmAction = createAsyncThunk<void, undefined, {
   'data/fetchFilms',
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<Films>(APIRoute.Films);
-    dispatch(setFilmsDataLoadedStatus(false));
-    dispatch(loadFilms(data));
-    dispatch(setFilmsDataLoadedStatus(true));
+    return data;
   },
 );
 
-export const fetchCurrentFilmAction = createAsyncThunk<void, string | undefined, {
+export const fetchCurrentFilmAction = createAsyncThunk<Film | Films | Reviews, string | undefined, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
 }>(
   'data/fetchCurrentFilm',
   async (id, {dispatch, extra: api}) => {
-    try {
-      dispatch(setCurrentFilmDataLoadedStatus(false));
-      const {data: currentFilm} = await api.get<Film>(`${APIRoute.Films}/${id}`);
-      const {data: similarFilms} = await api.get<Films>(`${APIRoute.Films}/${id}/similar`);
-      const {data: reviews} = await api.get<Reviews>(`${APIRoute.Reviews}/${id}`);
-      dispatch(loadCurrentFilm(currentFilm));
-      dispatch(loadSimilarFilms(similarFilms));
-      dispatch(loadReviews(reviews));
-      dispatch(setCurrentFilmDataLoadedStatus(true));
-    } catch {
-      dispatch(setCurrentFilmDataLoadedStatus(true));
-    }
+    const {data: currentFilm} = await api.get<Film>(`${APIRoute.Films}/${id}`);
+    const {data: similarFilms} = await api.get<Films>(`${APIRoute.Films}/${id}/similar`);
+    const {data: reviews} = await api.get<Reviews>(`${APIRoute.Reviews}/${id}`);
+
+    return {currentFilm, similarFilms, reviews};
   }
 );
 

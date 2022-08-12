@@ -6,28 +6,13 @@ import { Reviews } from '../types/review';
 import { DEFAULT_GENRE, FILMS_PER_STEP_COUNT } from '../const';
 
 type InitialState = {
-  genre: string,
-  films: Films,
-  currentFilm: Film,
-  similarFilms: Films,
-  filmsByGenre: Films,
-  reviews: Reviews,
-  filmsPerStep: number,
-  isFilmsDataLoaded: boolean,
-  isCurrentFilmDataLoaded: boolean,
   error: string | null,
 }
 
 const initialState: InitialState = {
   genre: DEFAULT_GENRE,
-  films: [],
-  currentFilm: {} as Film,
-  similarFilms: [],
   filmsByGenre: [],
-  reviews: [],
-  filmsPerStep: FILMS_PER_STEP_COUNT,
-  isFilmsDataLoaded: false,
-  isCurrentFilmDataLoaded: false,
+  filmsPerStep: FILMS_PER_STEP_COUNT,s
   error: null,
 };
 
