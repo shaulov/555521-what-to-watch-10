@@ -27,7 +27,7 @@ export const filmData = createSlice({
       state.genre = action.payload;
       state.filmsPerStep = FILMS_PER_STEP_COUNT;
     },
-    getFilmListByGenre: (state, action) => {
+    getFilmListByGenre: (state) => {
       state.filmsByGenre = state.genre === DEFAULT_GENRE ? state.films : state.films.filter((film) => film.genre === state.genre);
     },
     showMoreFilms: (state, action) => {

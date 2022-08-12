@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { filmData } from '../../store/film-data/film-data';
 
@@ -18,9 +19,13 @@ function MainScreen (): JSX.Element {
 
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    dispatch(filmData.actions.getFilmListByGenre());
+  }, []);
+
   const onFilterChange = (genre: string) => {
     dispatch(filmData.actions.changeGenre(genre));
-    dispatch(filmData.actions.getFilmListByGenre(genre));
+    dispatch(filmData.actions.getFilmListByGenre());
   };
 
   const onShowMoreButtonClick = () => {
