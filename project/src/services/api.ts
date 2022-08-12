@@ -1,7 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 import { StatusCodes } from 'http-status-codes';
 import { getToken } from './token';
-
 import { toast } from 'react-toastify';
 
 const StatusCodeMapping: Record<number, boolean> = {

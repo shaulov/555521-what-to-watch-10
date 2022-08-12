@@ -1,12 +1,8 @@
 import { Fragment, useState, ChangeEvent, FormEvent } from 'react';
-
 import { useParams } from 'react-router-dom';
-
 import { useAppDispatch } from '../../hooks';
-
 import { postReviewAction } from '../../store/api-actions';
 import { redirectToRoute } from '../../store/action';
-
 import { AppRoute, MIN_REVIEW_LENGTH, MAX_REVIEW_LENGTH } from '../../const';
 
 type changeEvent = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
@@ -14,15 +10,12 @@ type formSubmit = FormEvent<HTMLFormElement>;
 
 function ReviewForm(): JSX.Element {
   const { filmId } = useParams();
-
   const [userReview, setUserReview] = useState({
     comment: '',
     rating: 0,
     filmId: 0,
   });
-
   const [isUploadingReview, setUploadingReview] = useState(false);
-
   const dispatch = useAppDispatch();
 
   const handleChange = (evt: changeEvent) => {

@@ -1,13 +1,8 @@
 import { Link } from 'react-router-dom';
-
 import { useAppSelector } from '../../hooks';
-
-
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
-
 import { AppRoute, AuthorizationStatus } from '../../const';
-
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { getCurrentFilm } from '../../store/film-data/selectors';
 

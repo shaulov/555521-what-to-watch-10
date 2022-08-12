@@ -1,5 +1,4 @@
 import { NameSpace } from '../../const';
-
 import { State } from '../../types/state';
 import { Film, Films } from '../../types/film';
 import { Reviews } from '../../types/review';

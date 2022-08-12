@@ -1,5 +1,4 @@
 import { Review } from '../../types/review';
-
 import { MONTH } from '../../const';
 
 type SingleFilmReviewProps = {
@@ -8,9 +7,7 @@ type SingleFilmReviewProps = {
 
 function SingleFilmReview({review}: SingleFilmReviewProps): JSX.Element {
   const { comment, date, rating, user } = review;
-
   const formatedDate = new Date(date);
-
   const reviewDate = `${MONTH[formatedDate.getMonth()]} ${formatedDate.getDate()}, ${formatedDate.getFullYear()}`;
   const dateTime = `${formatedDate.getFullYear()}-${formatedDate.getMonth() + 1}-${formatedDate.getDate()}`;
 

@@ -1,9 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-
 import { AuthorizationStatus, NameSpace } from '../../const';
 import { UserProcess } from '../../types/state';
 import { checkAuthAction, loginAction, logoutAction } from '../api-actions';
-
 
 const initialState: UserProcess = {
   authorizationStatus: AuthorizationStatus.Unknown,

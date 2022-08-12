@@ -1,29 +1,22 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
 import { useAppSelector, useAppDispatch } from '../../hooks';
-
 import { fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchFilmReviewsAction } from '../../store/api-actions';
-
 import Logo from '../../components/logo/logo';
 import SingleFullFilmCard from '../../components/single-full-film-card/single-full-film-card';
 import FilmsList from '../../components/films-list/films-list';
 import FilmCardNavigation from '../../components/film-card-navigation/film-card-navigation';
 import LoadingScreen from '../loading-screen/loading-screen';
 import Screen404 from '../404-screen/404-screen';
-
 import { SIMILAR_FILMS_COUNT } from '../../const';
-
 import { getCurrentFilm, getSimilarFilms, getReviews, getCurrentFilmDataLoadedStatus } from '../../store/film-data/selectors';
 
 function FilmScreen (): JSX.Element {
   const { filmId } = useParams();
-
   const currentFilm = useAppSelector(getCurrentFilm);
   const reviews = useAppSelector(getReviews);
   const similarFilms = useAppSelector(getSimilarFilms);
   const isCurrentFilmDataLoaded = useAppSelector(getCurrentFilmDataLoadedStatus);
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {

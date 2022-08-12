@@ -7,7 +7,6 @@ type FilmDetailsProps = {
 
 function FilmDetails({film}: FilmDetailsProps) : JSX.Element {
   const { director, starring, runTime, genre, released } = film;
-
   const filmRunTime = `${Math.trunc(runTime / 60)}h ${99 % 60}m`;
 
   return (

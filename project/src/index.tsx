@@ -2,9 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import App from './components/app/app';
-
 import 'react-toastify/dist/ReactToastify.css';
-
 import { store } from './store';
 import { fetchFilmAction, checkAuthAction } from './store/api-actions';
 
