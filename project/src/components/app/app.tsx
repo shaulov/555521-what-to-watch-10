@@ -2,6 +2,8 @@ import { Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
 
+import { ToastContainer } from 'react-toastify';
+
 import MainScreen from '../../pages/main-screen/main-screen';
 import FilmScreen from '../../pages/film-screen/film-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
@@ -35,6 +37,7 @@ function App(): JSX.Element {
 
   return (
     <HistoryRouter history={browserHistory}>
+      <ToastContainer />
       <ScrollToTop />
       <ResetFilmList />
       <Routes>
