@@ -39,8 +39,6 @@ export const PREVIEW_ACTIVATION_TIME = 1000;
 
 export const SHORT_STAIRS_NUMBER = 3;
 
-export const TIMEOUT_SHOW_ERROR = 3000;
-
 export const MIN_REVIEW_LENGTH = 50;
 
 export const MAX_REVIEW_LENGTH = 400;
