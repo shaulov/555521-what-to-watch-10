@@ -1,9 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
-
 import { ToastContainer } from 'react-toastify';
-
 import MainScreen from '../../pages/main-screen/main-screen';
 import FilmScreen from '../../pages/film-screen/film-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
@@ -14,13 +12,10 @@ import Screen404 from '../../pages/404-screen/404-screen';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import ScrollToTop from '../../components/scroll-to-top/scroll-to-top';
 import PrivateRoute from '../private-root/private-root';
-
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
-
 import ResetFilmList from '../../utils/resetFilmList';
 import { isCheckedAuth } from '../../utils/isCheckedAuth';
-
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { getFilms, getFilmsDataLoadedStatus } from '../../store/film-data/selectors';
 

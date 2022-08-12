@@ -1,10 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-
 import { NameSpace } from '../../const';
 import { FilmData } from '../../types/state';
 import { Film } from '../../types/film';
 import { fetchFilmAction, fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchFilmReviewsAction, postReviewAction } from '../api-actions';
-
 import { DEFAULT_GENRE, FILMS_PER_STEP_COUNT } from '../../const';
 
 const initialState: FilmData = {
@@ -78,3 +76,5 @@ export const filmData = createSlice({
       });
   }
 });
+
+export const { changeGenre, getFilmListByGenre, showMoreFilms } = filmData.actions;

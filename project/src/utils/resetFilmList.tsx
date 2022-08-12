@@ -1,18 +1,16 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-
 import { useAppDispatch } from '../hooks';
-import { filmData } from '../store/film-data/film-data';
-
 import { DEFAULT_GENRE, FILMS_PER_STEP_COUNT } from '../const';
+import { changeGenre, showMoreFilms } from '../store/film-data/film-data';
 
 function ResetFilmList() {
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
 
   useEffect(() => {
-    dispatch(filmData.actions.changeGenre(DEFAULT_GENRE));
-    dispatch(filmData.actions.showMoreFilms(FILMS_PER_STEP_COUNT));
+    dispatch(changeGenre(DEFAULT_GENRE));
+    dispatch(showMoreFilms(FILMS_PER_STEP_COUNT));
   }, [pathname]);
 
   return null;
