@@ -12,11 +12,15 @@ import LoadingScreen from '../loading-screen/loading-screen';
 
 import { AppRoute } from '../../const';
 
+import { getCurrentFilm, getCurrentFilmDataLoadedStatus } from '../../store/film-data/selectors';
+
 function AddReviewScreen (): JSX.Element {
 
   const { filmId } = useParams();
 
-  const { currentFilm, isCurrentFilmDataLoaded } = useAppSelector((state) => state);
+  const currentFilm = useAppSelector(getCurrentFilm);
+
+  const isCurrentFilmDataLoaded = useAppSelector(getCurrentFilmDataLoadedStatus);
 
   const dispatch = useAppDispatch();
 

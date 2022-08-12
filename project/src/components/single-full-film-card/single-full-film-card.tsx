@@ -8,8 +8,12 @@ import UserBlock from '../../components/user-block/user-block';
 
 import { AppRoute, AuthorizationStatus } from '../../const';
 
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getCurrentFilm } from '../../store/film-data/selectors';
+
 function SingleFullFilmCard(): JSX.Element {
-  const { currentFilm: {id, name, genre, released, backgroundImage}, authorizationStatus } = useAppSelector((state) => state);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const {id, name, genre, released, backgroundImage} = useAppSelector(getCurrentFilm);
 
   return (
     <div className="film-card__hero">

@@ -14,10 +14,15 @@ import Screen404 from '../404-screen/404-screen';
 
 import { SIMILAR_FILMS_COUNT } from '../../const';
 
+import { getCurrentFilm, getSimilarFilms, getReviews, getCurrentFilmDataLoadedStatus } from '../../store/film-data/selectors';
+
 function FilmScreen (): JSX.Element {
   const { filmId } = useParams();
 
-  const { currentFilm, reviews, similarFilms, isCurrentFilmDataLoaded } = useAppSelector((state) => state);
+  const currentFilm = useAppSelector(getCurrentFilm);
+  const reviews = useAppSelector(getReviews);
+  const similarFilms = useAppSelector(getSimilarFilms);
+  const isCurrentFilmDataLoaded = useAppSelector(getCurrentFilmDataLoadedStatus);
 
   const dispatch = useAppDispatch();
 

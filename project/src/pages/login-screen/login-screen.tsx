@@ -8,8 +8,10 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 
 import Logo from '../../components/logo/logo';
 
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+
 function LoginScreen (): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);

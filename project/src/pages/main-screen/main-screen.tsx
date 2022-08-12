@@ -1,5 +1,5 @@
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import { changeGenre, getFilmListByGenre, showMoreFilms } from '../../store/action';
+import { changeGenre, showMoreFilms } from '../../store/action';
 
 import MainFilmCard from '../../components/main-film-card/main-film-card';
 import GenresList from '../../components/genres-list/genres-list';
@@ -9,14 +9,17 @@ import MoreButton from '../../components/more-button/more-button';
 
 import { GENRES, FILMS_PER_STEP_COUNT } from '../../const';
 
+import { getFilms, getFilmsPerStep, getFilmsByGenre } from '../../store/film-data/selectors';
+
 function MainScreen (): JSX.Element {
-  const { films, filmsPerStep, filmsByGenre } = useAppSelector((state) => state);
+  const films = useAppSelector(getFilms);
+  const filmsPerStep = useAppSelector(getFilmsPerStep);
+  const filmsByGenre = useAppSelector(getFilmsByGenre);
 
   const dispatch = useAppDispatch();
 
   const onFilterChange = (genre: string) => {
     dispatch(changeGenre(genre));
-    dispatch(getFilmListByGenre());
   };
 
   const onShowMoreButtonClick = () => {
