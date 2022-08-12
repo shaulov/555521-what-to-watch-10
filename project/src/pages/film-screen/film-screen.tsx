@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { useAppSelector, useAppDispatch } from '../../hooks';
 
-import { fetchCurrentFilmAction } from '../../store/api-actions';
+import { fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchFilmReviewsAction } from '../../store/api-actions';
 
 import Logo from '../../components/logo/logo';
 import SingleFullFilmCard from '../../components/single-full-film-card/single-full-film-card';
@@ -23,6 +23,8 @@ function FilmScreen (): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchCurrentFilmAction(filmId));
+    dispatch(fetchSimilarFilmsAction(filmId));
+    dispatch(fetchFilmReviewsAction(filmId));
   }, [filmId]);
 
   if (!isCurrentFilmDataLoaded) {

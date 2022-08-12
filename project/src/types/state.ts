@@ -4,23 +4,20 @@ import { Reviews } from './review';
 import { AuthorizationStatus } from '../const';
 
 export type UserProcess = {
-  authorizationStatus: AuthorizationStatus
+  authorizationStatus: AuthorizationStatus,
 };
 
 export type FilmData = {
+  genre: string,
+  filmsPerStep: number,
   films: Films,
   currentFilm: Film,
   similarFilms: Films,
+  filmsByGenre: Films,
   reviews: Reviews,
   isFilmsDataLoaded: boolean,
   isCurrentFilmDataLoaded: boolean,
 }
-
-export type FilmProcess = {
-  genre: string,
-  filmsByGenre: Films,
-  filmsPerStep: number,
-};
 
 export type State = ReturnType<typeof store.getState>;
 
