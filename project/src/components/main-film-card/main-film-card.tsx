@@ -1,6 +1,5 @@
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
-
 import { Film } from '../../types/film';
 
 type MainFilmCardProps = {

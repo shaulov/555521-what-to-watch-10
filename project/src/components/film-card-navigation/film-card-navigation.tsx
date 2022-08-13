@@ -1,10 +1,8 @@
 import { useState } from 'react';
-
 import FilmOverview from '../film-overview/film-overview';
 import FilmDetails from '../film-details/film-details';
 import FilmReviews from '../film-reviews/film-reviews';
 import NavigationTabContent from '../navigation-tab-content/navigation-tab-content';
-
 import { Film } from '../../types/film';
 import { Reviews } from '../../types/review';
 

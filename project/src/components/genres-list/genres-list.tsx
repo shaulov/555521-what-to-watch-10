@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-
 import { useAppSelector } from '../../hooks';
+import { getGenre } from '../../store/film-data/selectors';
 
 type GenresListProps = {
   genres: readonly string[];
@@ -8,7 +8,7 @@ type GenresListProps = {
 }
 
 function GenresList({genres, onFilterChange}: GenresListProps): JSX.Element {
-  const activeGenre = useAppSelector((state) => state.genre);
+  const activeGenre = useAppSelector(getGenre);
 
   return(
     <ul className="catalog__genres-list">

@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import { Film } from '../../types/film';
-
 import { PREVIEW_ACTIVATION_TIME } from '../../const';
 
 type VideoPlayerProps = {

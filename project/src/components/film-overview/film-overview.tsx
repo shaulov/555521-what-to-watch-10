@@ -1,7 +1,5 @@
 import { Film } from '../../types/film';
-
 import { SHORT_STAIRS_NUMBER } from '../../const';
-
 import { getFilmRatingLevel } from '../../utils/getFilmRatingLevel';
 
 type FilmOverviewProps = {
@@ -9,7 +7,6 @@ type FilmOverviewProps = {
 }
 
 function FilmOverview({film}: FilmOverviewProps) : JSX.Element {
-
   const { rating, scoresCount, description, director, starring } = film;
 
   return(

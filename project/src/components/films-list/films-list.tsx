@@ -1,5 +1,4 @@
 import SingleFilmCard from '../../components/single-film-card/single-film-card';
-
 import { Film } from '../../types/film';
 
 type FilmsListProps = {

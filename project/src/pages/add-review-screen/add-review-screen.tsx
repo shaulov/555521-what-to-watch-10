@@ -1,23 +1,18 @@
 import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-
 import { useAppSelector, useAppDispatch } from '../../hooks';
-
 import { fetchCurrentFilmAction } from '../../store/api-actions';
-
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import ReviewForm from '../../components/review-form/review-form';
 import LoadingScreen from '../loading-screen/loading-screen';
-
 import { AppRoute } from '../../const';
+import { getCurrentFilm, getCurrentFilmDataLoadedStatus } from '../../store/film-data/selectors';
 
 function AddReviewScreen (): JSX.Element {
-
   const { filmId } = useParams();
-
-  const { currentFilm, isCurrentFilmDataLoaded } = useAppSelector((state) => state);
-
+  const currentFilm = useAppSelector(getCurrentFilm);
+  const isCurrentFilmDataLoaded = useAppSelector(getCurrentFilmDataLoadedStatus);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

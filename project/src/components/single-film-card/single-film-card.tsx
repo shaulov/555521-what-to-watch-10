@@ -1,12 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import { Film } from '../../types/film';
-
 import VideoPlayer from '../video-player/video-player';
-
 import { AppRoute } from '../../const';
-
 
 type SingleFilmCardProps = {
   film: Film;
@@ -14,7 +10,6 @@ type SingleFilmCardProps = {
 
 function SingleFilmCard ({ film }: SingleFilmCardProps) : JSX.Element {
   const { id, name, previewImage } = film;
-
   const [isPlayer, setPlayer] = useState(false);
 
   return (

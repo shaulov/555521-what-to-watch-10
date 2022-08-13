@@ -1,5 +1,4 @@
 import SingleFilmReview from '../single-film-review/single-film-review';
-
 import { Reviews } from '../../types/review';
 
 type SingleReviewCardProps = {
@@ -7,7 +6,6 @@ type SingleReviewCardProps = {
 }
 
 function FilmReviews({filmReviews}: SingleReviewCardProps): JSX.Element {
-
   const reviews = filmReviews.map((filmReview) => (
     <SingleFilmReview review={filmReview} key={filmReview.id} />
   ));

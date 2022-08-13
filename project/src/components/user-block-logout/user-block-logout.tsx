@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom';
-
 import { useAppDispatch } from '../../hooks';
-
 import { logoutAction } from '../../store/api-actions';
 
 function UserBlockLogout(): JSX.Element {
