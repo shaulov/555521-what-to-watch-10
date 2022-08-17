@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
+import PlayButton from '../play-button/play-button';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { getCurrentFilm } from '../../store/film-data/selectors';
@@ -9,6 +10,7 @@ import { getCurrentFilm } from '../../store/film-data/selectors';
 function SingleFullFilmCard(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const {id, name, genre, released, backgroundImage} = useAppSelector(getCurrentFilm);
+  const navigate = useNavigate();
 
   return (
     <div className="film-card__hero">
@@ -33,11 +35,12 @@ function SingleFullFilmCard(): JSX.Element {
           </p>
 
           <div className="film-card__buttons">
-            <button className="btn btn--play film-card__button" type="button">
-              <svg viewBox="0 0 19 19" width="19" height="19">
-                <use xlinkHref="#play-s"></use>
-              </svg>
-              <span>Play</span>
+            <button
+              className="btn btn--play film-card__button"
+              type="button"
+              onClick={() => navigate(`${AppRoute.Player}/${id}`, {replace: true})}
+            >
+              <PlayButton />
             </button>
             <button className="btn btn--list film-card__button" type="button">
               <svg viewBox="0 0 19 20" width="19" height="20">

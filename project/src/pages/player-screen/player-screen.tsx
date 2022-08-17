@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { fetchCurrentFilmAction } from '../../store/api-actions';
 import { getCurrentFilm, getCurrentFilmDataLoadedStatus } from '../../store/film-data/selectors';
@@ -7,6 +7,7 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import Screen404 from '../404-screen/404-screen';
 import PlayButton from '../../components/play-button/play-button';
 import PauseButton from '../../components/pause-button/pause-button';
+import { AppRoute } from '../../const';
 
 function PlayerScreen (): JSX.Element {
   const { filmId } = useParams();
@@ -14,6 +15,7 @@ function PlayerScreen (): JSX.Element {
   const isCurrentFilmDataLoaded = useAppSelector(getCurrentFilmDataLoadedStatus);
   const dispatch = useAppDispatch();
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const navigate = useNavigate();
 
   const [isPlaying, setPlaying] = useState(false);
 
@@ -36,6 +38,7 @@ function PlayerScreen (): JSX.Element {
   const { name, videoLink, previewImage } = currentFilm;
 
   const handleClick = () => {
+    isPlaying ? videoRef.current?.pause() : videoRef.current?.play();
     setPlaying(!isPlaying);
   };
 
@@ -49,7 +52,13 @@ function PlayerScreen (): JSX.Element {
       >
       </video>
 
-      <button type="button" className="player__exit">Exit</button>
+      <button
+        type="button"
+        className="player__exit"
+        onClick={() => navigate(`${AppRoute.Film}/${filmId}`, {replace: true})}
+      >
+        Exit
+      </button>
 
       <div className="player__controls">
         <div className="player__controls-row">

@@ -1,12 +1,17 @@
+import { useNavigate } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
+import PlayButton from '../play-button/play-button';
 import { Film } from '../../types/film';
+import { AppRoute } from '../../const';
 
 type MainFilmCardProps = {
   film: Film;
 }
 
 function MainFilmCard({film}: MainFilmCardProps) : JSX.Element {
+  const navigate = useNavigate();
+
   return (
     <section className="film-card">
       <div className="film-card__bg">
@@ -35,11 +40,12 @@ function MainFilmCard({film}: MainFilmCardProps) : JSX.Element {
             </p>
 
             <div className="film-card__buttons">
-              <button className="btn btn--play film-card__button" type="button">
-                <svg viewBox="0 0 19 19" width="19" height="19">
-                  <use xlinkHref="#play-s"></use>
-                </svg>
-                <span>Play</span>
+              <button
+                className="btn btn--play film-card__button"
+                type="button"
+                onClick={() => navigate(`${AppRoute.Player}/${film.id}`, {replace: true})}
+              >
+                <PlayButton />
               </button>
               <button className="btn btn--list film-card__button" type="button">
                 <svg viewBox="0 0 19 20" width="19" height="20">
