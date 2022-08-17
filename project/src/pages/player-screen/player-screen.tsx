@@ -8,6 +8,7 @@ import Screen404 from '../404-screen/404-screen';
 import PlayButton from '../../components/play-button/play-button';
 import PauseButton from '../../components/pause-button/pause-button';
 import { AppRoute } from '../../const';
+import { getFilmDuration } from '../../utils/getFilmDuration';
 
 function PlayerScreen (): JSX.Element {
   const { filmId } = useParams();
@@ -37,10 +38,13 @@ function PlayerScreen (): JSX.Element {
 
   const { name, videoLink, previewImage } = currentFilm;
 
-  const handleClick = () => {
+  const handleControlsClick = () => {
     isPlaying ? videoRef.current?.pause() : videoRef.current?.play();
     setPlaying(!isPlaying);
   };
+
+  const filmDuration = videoRef.current?.duration || 0;
+  const playerProgress = videoRef.current?.currentTime ? videoRef.current?.currentTime / filmDuration * 100 : 0;
 
   return (
     <div className="player">
@@ -63,17 +67,17 @@ function PlayerScreen (): JSX.Element {
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">
-            <progress className="player__progress" value="30" max="100"></progress>
-            <div className="player__toggler" style={{left: '30%'}}>Toggler</div>
+            <progress className="player__progress" value={playerProgress} max="100"></progress>
+            <div className="player__toggler" style={{left: `${playerProgress}%`}}>Toggler</div>
           </div>
-          <div className="player__time-value">1:30:29</div>
+          <div className="player__time-value">{getFilmDuration(filmDuration)}</div>
         </div>
 
         <div className="player__controls-row">
           <button
             type="button"
             className="player__play"
-            onClick={handleClick}
+            onClick={handleControlsClick}
           >
             {
               isPlaying
@@ -83,7 +87,11 @@ function PlayerScreen (): JSX.Element {
           </button>
           <div className="player__name">{name}</div>
 
-          <button type="button" className="player__full-screen">
+          <button
+            type="button"
+            className="player__full-screen"
+            onClick={() => videoRef.current?.requestFullscreen()}
+          >
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"></use>
             </svg>
