@@ -58,8 +58,12 @@ function App(): JSX.Element {
         </Route>
         <Route
           path={AppRoute.Player}
-          element={<PlayerScreen film={films[0]} />}
-        />
+        >
+          <Route
+            path=":filmId"
+            element={<PlayerScreen />}
+          />
+        </Route>
         <Route
           path={AppRoute.MyList}
           element={
