@@ -8,10 +8,12 @@ type MainFilmCardProps = {
 }
 
 function MainFilmCard({film}: MainFilmCardProps) : JSX.Element {
+  const { id, name, backgroundImage, posterImage, genre, released, isFavorite } = film;
+
   return (
     <section className="film-card">
       <div className="film-card__bg">
-        <img src={film.backgroundImage} alt={film.name} />
+        <img src={backgroundImage} alt={name} />
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -25,17 +27,17 @@ function MainFilmCard({film}: MainFilmCardProps) : JSX.Element {
       <div className="film-card__wrap">
         <div className="film-card__info">
           <div className="film-card__poster">
-            <img src={film.posterImage} alt="The Grand Budapest Hotel poster" width="218" height="327" />
+            <img src={posterImage} alt="The Grand Budapest Hotel poster" width="218" height="327" />
           </div>
 
           <div className="film-card__desc">
-            <h2 className="film-card__title">{film.name}</h2>
+            <h2 className="film-card__title">{name}</h2>
             <p className="film-card__meta">
-              <span className="film-card__genre">{film.genre}</span>
-              <span className="film-card__year">{film.released}</span>
+              <span className="film-card__genre">{genre}</span>
+              <span className="film-card__year">{released}</span>
             </p>
 
-            <FilmCardButtons id={film.id} />
+            <FilmCardButtons id={id} isFavorite={isFavorite} />
           </div>
         </div>
       </div>

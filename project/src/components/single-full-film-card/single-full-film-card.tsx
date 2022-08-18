@@ -7,7 +7,7 @@ import { getCurrentFilm } from '../../store/film-data/selectors';
 
 function SingleFullFilmCard(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const {id, name, genre, released, backgroundImage} = useAppSelector(getCurrentFilm);
+  const { id, name, genre, released, backgroundImage, isFavorite } = useAppSelector(getCurrentFilm);
 
   return (
     <div className="film-card__hero">
@@ -31,7 +31,7 @@ function SingleFullFilmCard(): JSX.Element {
             <span className="film-card__year">{released}</span>
           </p>
 
-          <FilmCardButtons id={id} authorizationStatus={authorizationStatus} />
+          <FilmCardButtons id={id} isFavorite={isFavorite} authorizationStatus={authorizationStatus} />
         </div>
       </div>
     </div>

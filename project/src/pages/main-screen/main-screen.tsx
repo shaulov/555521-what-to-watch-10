@@ -7,7 +7,7 @@ import Logo from '../../components/logo/logo';
 import MoreButton from '../../components/more-button/more-button';
 import { GENRES, FILMS_PER_STEP_COUNT } from '../../const';
 import { getFilms, getFilmsPerStep, getFilmsByGenre } from '../../store/film-data/selectors';
-import { changeGenre, getFilmListByGenre, showMoreFilms } from '../../store/film-data/film-data';
+import { changeGenre, getFilmListByGenre, showMoreFilms, getFavoriteFilms } from '../../store/film-data/film-data';
 
 function MainScreen (): JSX.Element {
   const films = useAppSelector(getFilms);
@@ -17,6 +17,7 @@ function MainScreen (): JSX.Element {
 
   useEffect(() => {
     dispatch(getFilmListByGenre());
+    dispatch(getFavoriteFilms());
   }, []);
 
   const onFilterChange = (genre: string) => {

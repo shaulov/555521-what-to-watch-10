@@ -17,11 +17,10 @@ import browserHistory from '../../browser-history';
 import ResetFilmList from '../../utils/resetFilmList';
 import { isCheckedAuth } from '../../utils/isCheckedAuth';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { getFilms, getFilmsDataLoadedStatus } from '../../store/film-data/selectors';
+import { getFilmsDataLoadedStatus } from '../../store/film-data/selectors';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const films = useAppSelector(getFilms);
   const isFilmsDataLoaded = useAppSelector(getFilmsDataLoadedStatus);
 
   if (!isFilmsDataLoaded || isCheckedAuth(authorizationStatus)) {
@@ -68,7 +67,7 @@ function App(): JSX.Element {
           path={AppRoute.MyList}
           element={
             <PrivateRoute authorizationStatus={authorizationStatus}>
-              <MyListScreen films={films}/>
+              <MyListScreen />
             </PrivateRoute>
           }
         />

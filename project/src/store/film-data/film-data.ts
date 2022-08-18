@@ -13,6 +13,7 @@ const initialState: FilmData = {
   similarFilms: [],
   filmsByGenre: [],
   reviews: [],
+  favoriteFilms: [],
   isFilmsDataLoaded: false,
   isCurrentFilmDataLoaded: false,
 };
@@ -31,6 +32,9 @@ export const filmData = createSlice({
     showMoreFilms: (state, action) => {
       state.filmsPerStep = action.payload;
     },
+    getFavoriteFilms: (state) => {
+      state.favoriteFilms = state.films.filter((film) => film.isFavorite);
+    }
   },
   extraReducers(builder) {
     builder
@@ -77,4 +81,4 @@ export const filmData = createSlice({
   }
 });
 
-export const { changeGenre, getFilmListByGenre, showMoreFilms } = filmData.actions;
+export const { changeGenre, getFilmListByGenre, showMoreFilms, getFavoriteFilms } = filmData.actions;
