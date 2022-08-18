@@ -1,7 +1,8 @@
-import { useAppSelector } from '../../hooks';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import PlayButton from '../play-button/play-button';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { changeFavoriteStatusAction } from '../../store/api-actions';
 import { getFavoriteFilms } from '../../store/film-data/selectors';
 
 type FilmCardButtonsProps = {
@@ -14,11 +15,16 @@ function FilmCardButtons({id, isFavorite, authorizationStatus}: FilmCardButtonsP
   const films = useAppSelector(getFavoriteFilms);
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const dispatch = useAppDispatch();
 
   const handleFavoriteClick = () => {
-    if (authorizationStatus !== AuthorizationStatus.Auth) {
+    if (authorizationStatus === AuthorizationStatus.NoAuth) {
       navigate(AppRoute.Login, {replace: true});
     }
+
+    const status = Number(!isFavorite);
+
+    dispatch(changeFavoriteStatusAction({id, status}));
   };
 
   return (

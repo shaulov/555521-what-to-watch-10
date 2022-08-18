@@ -1,11 +1,18 @@
-import { useAppSelector } from '../../hooks';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import FilmsList from '../../components/films-list/films-list';
 import { getFavoriteFilms } from '../../store/film-data/selectors';
+import { fetchFavoriteFilmsAction } from '../../store/api-actions';
 
 function MyListScreen (): JSX.Element {
   const films = useAppSelector(getFavoriteFilms);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchFavoriteFilmsAction());
+  }, []);
 
   return (
     <div className="user-page">

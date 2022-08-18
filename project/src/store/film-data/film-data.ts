@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { FilmData } from '../../types/state';
 import { Film } from '../../types/film';
-import { fetchFilmAction, fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchFavoriteFilmsAction, fetchFilmReviewsAction, postReviewAction } from '../api-actions';
+import { fetchFilmAction, fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchFavoriteFilmsAction, fetchFilmReviewsAction, changeFavoriteStatusAction, postReviewAction } from '../api-actions';
 import { DEFAULT_GENRE, FILMS_PER_STEP_COUNT } from '../../const';
 
 const initialState: FilmData = {
@@ -69,6 +69,13 @@ export const filmData = createSlice({
       .addCase(fetchFavoriteFilmsAction.fulfilled, (state, action) => {
         state.favoriteFilms = action.payload;
         state.isFavoriteFilmsDataLoaded = true;
+      })
+      .addCase(fetchFavoriteFilmsAction.rejected, (state) => {
+        state.isFavoriteFilmsDataLoaded = false;
+      })
+      .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
+        state.favoriteFilms.push(action.payload);
+        state.currentFilm = action.payload;
       })
       .addCase(fetchFilmReviewsAction.pending, (state) => {
         state.isCurrentFilmDataLoaded = false;
