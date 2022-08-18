@@ -35,7 +35,7 @@ function PlayerScreen (): JSX.Element {
     );
   }
 
-  const { name, videoLink, previewImage } = currentFilm;
+  const { name, videoLink, previewImage, runTime } = currentFilm;
 
   const handleControlsClick = () => {
     isPlaying ? videoRef.current?.pause() : videoRef.current?.play();
@@ -45,9 +45,6 @@ function PlayerScreen (): JSX.Element {
   const handleFullScreenClick = () => {
     videoRef.current?.requestFullscreen();
   };
-
-  const filmDuration = videoRef.current?.duration || 0;
-  const playerProgress = videoRef.current?.currentTime ? videoRef.current?.currentTime / filmDuration * 100 : 0;
 
   return (
     <div className="player">
@@ -69,7 +66,7 @@ function PlayerScreen (): JSX.Element {
 
       <div className="player__controls">
         <div className="player__controls-row">
-          <PlayerTimeBar filmDuration={filmDuration} playerProgress={playerProgress}/>
+          <PlayerTimeBar filmDuration={runTime} playerProgress={30}/>
         </div>
 
         <div className="player__controls-row">
