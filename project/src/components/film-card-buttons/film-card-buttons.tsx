@@ -1,6 +1,8 @@
+import { useAppSelector } from '../../hooks';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import PlayButton from '../play-button/play-button';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { getFavoriteFilms } from '../../store/film-data/selectors';
 
 type FilmCardButtonsProps = {
   id: number;
@@ -9,8 +11,15 @@ type FilmCardButtonsProps = {
 }
 
 function FilmCardButtons({id, isFavorite, authorizationStatus}: FilmCardButtonsProps): JSX.Element {
+  const films = useAppSelector(getFavoriteFilms);
   const navigate = useNavigate();
   const { pathname } = useLocation();
+
+  const handleFavoriteClick = () => {
+    if (authorizationStatus !== AuthorizationStatus.Auth) {
+      navigate(AppRoute.Login, {replace: true});
+    }
+  };
 
   return (
     <div className="film-card__buttons">
@@ -21,7 +30,11 @@ function FilmCardButtons({id, isFavorite, authorizationStatus}: FilmCardButtonsP
       >
         <PlayButton />
       </button>
-      <button className="btn btn--list film-card__button" type="button">
+      <button
+        className="btn btn--list film-card__button"
+        type="button"
+        onClick={handleFavoriteClick}
+      >
         {
           isFavorite
             ? (
@@ -36,7 +49,7 @@ function FilmCardButtons({id, isFavorite, authorizationStatus}: FilmCardButtonsP
             )
         }
         <span>My list</span>
-        <span className="film-card__count">9</span>
+        <span className="film-card__count">{films.length}</span>
       </button>
       {
         authorizationStatus === AuthorizationStatus.Auth && pathname.includes(AppRoute.Film)

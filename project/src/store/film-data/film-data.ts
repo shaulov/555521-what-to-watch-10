@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { FilmData } from '../../types/state';
 import { Film } from '../../types/film';
-import { fetchFilmAction, fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchFilmReviewsAction, postReviewAction } from '../api-actions';
+import { fetchFilmAction, fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchFavoriteFilmsAction, fetchFilmReviewsAction, postReviewAction } from '../api-actions';
 import { DEFAULT_GENRE, FILMS_PER_STEP_COUNT } from '../../const';
 
 const initialState: FilmData = {
@@ -16,6 +16,7 @@ const initialState: FilmData = {
   favoriteFilms: [],
   isFilmsDataLoaded: false,
   isCurrentFilmDataLoaded: false,
+  isFavoriteFilmsDataLoaded: false,
 };
 
 export const filmData = createSlice({
@@ -32,9 +33,6 @@ export const filmData = createSlice({
     showMoreFilms: (state, action) => {
       state.filmsPerStep = action.payload;
     },
-    getFavoriteFilms: (state) => {
-      state.favoriteFilms = state.films.filter((film) => film.isFavorite);
-    }
   },
   extraReducers(builder) {
     builder
@@ -65,6 +63,13 @@ export const filmData = createSlice({
       .addCase(fetchSimilarFilmsAction.rejected, (state) => {
         state.isCurrentFilmDataLoaded = false;
       })
+      .addCase(fetchFavoriteFilmsAction.pending, (state) => {
+        state.isFavoriteFilmsDataLoaded = false;
+      })
+      .addCase(fetchFavoriteFilmsAction.fulfilled, (state, action) => {
+        state.favoriteFilms = action.payload;
+        state.isFavoriteFilmsDataLoaded = true;
+      })
       .addCase(fetchFilmReviewsAction.pending, (state) => {
         state.isCurrentFilmDataLoaded = false;
       })
@@ -81,4 +86,4 @@ export const filmData = createSlice({
   }
 });
 
-export const { changeGenre, getFilmListByGenre, showMoreFilms, getFavoriteFilms } = filmData.actions;
+export const { changeGenre, getFilmListByGenre, showMoreFilms } = filmData.actions;

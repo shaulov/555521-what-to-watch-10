@@ -5,19 +5,24 @@ import GenresList from '../../components/genres-list/genres-list';
 import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import MoreButton from '../../components/more-button/more-button';
-import { GENRES, FILMS_PER_STEP_COUNT } from '../../const';
+import { GENRES, FILMS_PER_STEP_COUNT, AuthorizationStatus } from '../../const';
 import { getFilms, getFilmsPerStep, getFilmsByGenre } from '../../store/film-data/selectors';
-import { changeGenre, getFilmListByGenre, showMoreFilms, getFavoriteFilms } from '../../store/film-data/film-data';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { changeGenre, getFilmListByGenre, showMoreFilms } from '../../store/film-data/film-data';
+import { fetchFavoriteFilmsAction } from '../../store/api-actions';
 
 function MainScreen (): JSX.Element {
   const films = useAppSelector(getFilms);
   const filmsPerStep = useAppSelector(getFilmsPerStep);
   const filmsByGenre = useAppSelector(getFilmsByGenre);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getFilmListByGenre());
-    dispatch(getFavoriteFilms());
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(fetchFavoriteFilmsAction());
+    }
   }, []);
 
   const onFilterChange = (genre: string) => {
