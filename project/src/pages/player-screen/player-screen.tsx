@@ -46,6 +46,11 @@ function PlayerScreen (): JSX.Element {
     videoRef.current?.requestFullscreen();
   };
 
+  const handleExitClick = () => {
+    videoRef.current?.pause();
+    navigate(`${AppRoute.Film}/${filmId}`, {replace: true});
+  };
+
   return (
     <div className="player">
       <video
@@ -59,14 +64,14 @@ function PlayerScreen (): JSX.Element {
       <button
         type="button"
         className="player__exit"
-        onClick={() => navigate(`${AppRoute.Film}/${filmId}`, {replace: true})}
+        onClick={handleExitClick}
       >
         Exit
       </button>
 
       <div className="player__controls">
         <div className="player__controls-row">
-          <PlayerTimeBar filmDuration={runTime} playerProgress={30}/>
+          <PlayerTimeBar filmDuration={runTime} isPlaying={isPlaying}/>
         </div>
 
         <div className="player__controls-row">

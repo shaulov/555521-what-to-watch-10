@@ -1,7 +1,7 @@
 export const getFilmDuration = (duration: number) => {
-  const seconds = Math.floor((duration * 60) % 60);
-  const minutes = Math.floor(duration % 60);
-  const hours = Math.floor((duration / 60) % 60);
+  const seconds = Math.floor((duration) % 60);
+  const minutes = Math.floor((duration / 60) % 60);
+  const hours = Math.floor((duration / 60 / 60) % 60);
 
   const displayedSeconds = seconds < 10 ? `0${seconds}` : seconds;
   const displayedMinutes = minutes < 10 ? `0${minutes}` : minutes;
