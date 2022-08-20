@@ -4,6 +4,7 @@ import { FilmData } from '../../types/state';
 import { Film } from '../../types/film';
 import { fetchFilmAction, fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchFavoriteFilmsAction, fetchFilmReviewsAction, changeFavoriteStatusAction, postReviewAction } from '../api-actions';
 import { DEFAULT_GENRE, FILMS_PER_STEP_COUNT } from '../../const';
+import { updateFilmList } from '../../utils/updateFilmList';
 
 const initialState: FilmData = {
   genre: DEFAULT_GENRE,
@@ -74,8 +75,13 @@ export const filmData = createSlice({
         state.isFavoriteFilmsDataLoaded = false;
       })
       .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
-        state.favoriteFilms.push(action.payload);
+        if (action.payload.isFavorite) {
+          state.favoriteFilms.push(action.payload);
+        } else {
+          state.favoriteFilms = updateFilmList(state.favoriteFilms, action.payload, false);
+        }
         state.currentFilm = action.payload;
+        state.films = updateFilmList(state.films, action.payload, true);
       })
       .addCase(fetchFilmReviewsAction.pending, (state) => {
         state.isCurrentFilmDataLoaded = false;
