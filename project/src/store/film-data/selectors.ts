@@ -17,6 +17,8 @@ export const getFilmsByGenre = (state: State): Films => state[NameSpace.Data].fi
 
 export const getReviews = (state: State): Reviews => state[NameSpace.Data].reviews;
 
+export const getFavoriteFilms = (state: State): Films => state[NameSpace.Data].favoriteFilms;
+
 export const getFilmsDataLoadedStatus = (state: State): boolean => state[NameSpace.Data].isFilmsDataLoaded;
 
 export const getCurrentFilmDataLoadedStatus = (state: State): boolean => state[NameSpace.Data].isCurrentFilmDataLoaded;

@@ -1,19 +1,25 @@
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import FilmsList from '../../components/films-list/films-list';
-import { Film } from '../../types/film';
+import { getFavoriteFilms } from '../../store/film-data/selectors';
+import { fetchFavoriteFilmsAction } from '../../store/api-actions';
 
-type MyListScreenProps = {
-  films: Film[],
-}
+function MyListScreen (): JSX.Element {
+  const films = useAppSelector(getFavoriteFilms);
+  const dispatch = useAppDispatch();
 
-function MyListScreen ({films}: MyListScreenProps): JSX.Element {
+  useEffect(() => {
+    dispatch(fetchFavoriteFilmsAction());
+  }, []);
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
         <Logo light={false} />
 
-        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">9</span></h1>
+        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{films.length}</span></h1>
         <UserBlock />
       </header>
 

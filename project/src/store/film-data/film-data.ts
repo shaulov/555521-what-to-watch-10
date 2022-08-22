@@ -2,8 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { FilmData } from '../../types/state';
 import { Film } from '../../types/film';
-import { fetchFilmAction, fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchFilmReviewsAction, postReviewAction } from '../api-actions';
+import { fetchFilmAction, fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchFavoriteFilmsAction, fetchFilmReviewsAction, changeFavoriteStatusAction, postReviewAction } from '../api-actions';
 import { DEFAULT_GENRE, FILMS_PER_STEP_COUNT } from '../../const';
+import { updateFilmList } from '../../utils/updateFilmList';
 
 const initialState: FilmData = {
   genre: DEFAULT_GENRE,
@@ -13,8 +14,10 @@ const initialState: FilmData = {
   similarFilms: [],
   filmsByGenre: [],
   reviews: [],
+  favoriteFilms: [],
   isFilmsDataLoaded: false,
   isCurrentFilmDataLoaded: false,
+  isFavoriteFilmsDataLoaded: false,
 };
 
 export const filmData = createSlice({
@@ -49,7 +52,7 @@ export const filmData = createSlice({
         state.isCurrentFilmDataLoaded = true;
       })
       .addCase(fetchCurrentFilmAction.rejected, (state) => {
-        state.isCurrentFilmDataLoaded = false;
+        state.isCurrentFilmDataLoaded = true;
       })
       .addCase(fetchSimilarFilmsAction.pending, (state) => {
         state.isCurrentFilmDataLoaded = false;
@@ -59,7 +62,26 @@ export const filmData = createSlice({
         state.isCurrentFilmDataLoaded = true;
       })
       .addCase(fetchSimilarFilmsAction.rejected, (state) => {
-        state.isCurrentFilmDataLoaded = false;
+        state.isCurrentFilmDataLoaded = true;
+      })
+      .addCase(fetchFavoriteFilmsAction.pending, (state) => {
+        state.isFavoriteFilmsDataLoaded = false;
+      })
+      .addCase(fetchFavoriteFilmsAction.fulfilled, (state, action) => {
+        state.favoriteFilms = action.payload;
+        state.isFavoriteFilmsDataLoaded = true;
+      })
+      .addCase(fetchFavoriteFilmsAction.rejected, (state) => {
+        state.isFavoriteFilmsDataLoaded = true;
+      })
+      .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
+        if (action.payload.isFavorite) {
+          state.favoriteFilms.push(action.payload);
+        } else {
+          state.favoriteFilms = updateFilmList(state.favoriteFilms, action.payload, false);
+        }
+        state.currentFilm = action.payload;
+        state.films = updateFilmList(state.films, action.payload, true);
       })
       .addCase(fetchFilmReviewsAction.pending, (state) => {
         state.isCurrentFilmDataLoaded = false;
@@ -69,7 +91,7 @@ export const filmData = createSlice({
         state.isCurrentFilmDataLoaded = true;
       })
       .addCase(fetchFilmReviewsAction.rejected, (state) => {
-        state.isCurrentFilmDataLoaded = false;
+        state.isCurrentFilmDataLoaded = true;
       })
       .addCase(postReviewAction.fulfilled, (state, action) => {
         state.reviews = action.payload;

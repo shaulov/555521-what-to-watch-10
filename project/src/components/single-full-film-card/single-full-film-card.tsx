@@ -1,14 +1,13 @@
-import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import FilmCardButtons from '../film-card-buttons/film-card-buttons';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { getCurrentFilm } from '../../store/film-data/selectors';
 
 function SingleFullFilmCard(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const {id, name, genre, released, backgroundImage} = useAppSelector(getCurrentFilm);
+  const { id, name, genre, released, backgroundImage, isFavorite } = useAppSelector(getCurrentFilm);
 
   return (
     <div className="film-card__hero">
@@ -32,25 +31,7 @@ function SingleFullFilmCard(): JSX.Element {
             <span className="film-card__year">{released}</span>
           </p>
 
-          <div className="film-card__buttons">
-            <button className="btn btn--play film-card__button" type="button">
-              <svg viewBox="0 0 19 19" width="19" height="19">
-                <use xlinkHref="#play-s"></use>
-              </svg>
-              <span>Play</span>
-            </button>
-            <button className="btn btn--list film-card__button" type="button">
-              <svg viewBox="0 0 19 20" width="19" height="20">
-                <use xlinkHref="#add"></use>
-              </svg>
-              <span>My list</span>
-              <span className="film-card__count">9</span>
-            </button>
-            {
-              authorizationStatus === AuthorizationStatus.Auth
-                    && <Link to={`${AppRoute.Film}/${id}${AppRoute.AddReview}`} className="btn film-card__button">Add review</Link>
-            }
-          </div>
+          <FilmCardButtons id={id} isFavorite={isFavorite} authorizationStatus={authorizationStatus} />
         </div>
       </div>
     </div>

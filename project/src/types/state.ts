@@ -15,8 +15,10 @@ export type FilmData = {
   similarFilms: Films,
   filmsByGenre: Films,
   reviews: Reviews,
+  favoriteFilms: Films,
   isFilmsDataLoaded: boolean,
   isCurrentFilmDataLoaded: boolean,
+  isFavoriteFilmsDataLoaded: boolean,
 }
 
 export type State = ReturnType<typeof store.getState>;
