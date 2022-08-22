@@ -7,5 +7,5 @@ export const getFilmDuration = (duration: number) => {
   const displayedMinutes = minutes < 10 ? `0${minutes}` : minutes;
   const displayedHours = hours < 10 ? `0${hours}` : hours;
 
-  return hours === 0 ? `${displayedMinutes}:${displayedSeconds}` : `${displayedHours}:${displayedMinutes}:${displayedSeconds}`;
+  return !hours ? `${displayedMinutes}:${displayedSeconds}` : `${displayedHours}:${displayedMinutes}:${displayedSeconds}`;
 };

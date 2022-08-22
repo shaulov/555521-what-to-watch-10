@@ -31,7 +31,7 @@ function FilmScreen (): JSX.Element {
     );
   }
 
-  if (isCurrentFilmDataLoaded && Object.keys(currentFilm).length === 0) {
+  if (isCurrentFilmDataLoaded && !Object.keys(currentFilm).length) {
     return (
       <Screen404 />
     );

@@ -7,7 +7,6 @@ type PlayerControlsProps = {
   handleFullScreenClick: MouseEventHandler<HTMLButtonElement>;
   isPlaying: boolean;
   name: string;
-
 }
 
 function PlayerControls({handleControlsClick, handleFullScreenClick, isPlaying, name}: PlayerControlsProps): JSX.Element {

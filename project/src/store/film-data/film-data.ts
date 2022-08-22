@@ -52,7 +52,7 @@ export const filmData = createSlice({
         state.isCurrentFilmDataLoaded = true;
       })
       .addCase(fetchCurrentFilmAction.rejected, (state) => {
-        state.isCurrentFilmDataLoaded = false;
+        state.isCurrentFilmDataLoaded = true;
       })
       .addCase(fetchSimilarFilmsAction.pending, (state) => {
         state.isCurrentFilmDataLoaded = false;
@@ -62,7 +62,7 @@ export const filmData = createSlice({
         state.isCurrentFilmDataLoaded = true;
       })
       .addCase(fetchSimilarFilmsAction.rejected, (state) => {
-        state.isCurrentFilmDataLoaded = false;
+        state.isCurrentFilmDataLoaded = true;
       })
       .addCase(fetchFavoriteFilmsAction.pending, (state) => {
         state.isFavoriteFilmsDataLoaded = false;
@@ -72,7 +72,7 @@ export const filmData = createSlice({
         state.isFavoriteFilmsDataLoaded = true;
       })
       .addCase(fetchFavoriteFilmsAction.rejected, (state) => {
-        state.isFavoriteFilmsDataLoaded = false;
+        state.isFavoriteFilmsDataLoaded = true;
       })
       .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
         if (action.payload.isFavorite) {
@@ -91,7 +91,7 @@ export const filmData = createSlice({
         state.isCurrentFilmDataLoaded = true;
       })
       .addCase(fetchFilmReviewsAction.rejected, (state) => {
-        state.isCurrentFilmDataLoaded = false;
+        state.isCurrentFilmDataLoaded = true;
       })
       .addCase(postReviewAction.fulfilled, (state, action) => {
         state.reviews = action.payload;

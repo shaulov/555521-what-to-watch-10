@@ -29,7 +29,7 @@ function PlayerScreen (): JSX.Element {
     );
   }
 
-  if (isCurrentFilmDataLoaded && Object.keys(currentFilm).length === 0) {
+  if (isCurrentFilmDataLoaded && !Object.keys(currentFilm).length) {
     return (
       <Screen404 />
     );
@@ -42,14 +42,9 @@ function PlayerScreen (): JSX.Element {
     setPlaying(!isPlaying);
   };
 
-  const handleFullScreenClick = () => {
-    videoRef.current?.requestFullscreen();
-  };
+  const handleFullScreenClick = () => videoRef.current?.requestFullscreen();
 
-  const handleExitClick = () => {
-    videoRef.current?.pause();
-    navigate(`${AppRoute.Film}/${filmId}`, {replace: true});
-  };
+  const handleExitClick = () => navigate(`${AppRoute.Film}/${filmId}`, {replace: true});
 
   return (
     <div className="player">

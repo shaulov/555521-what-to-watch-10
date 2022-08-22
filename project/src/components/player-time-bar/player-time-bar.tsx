@@ -9,10 +9,9 @@ type PlayerTimeBarProps = {
 function PlayerTimeBar({filmDuration, isPlaying}: PlayerTimeBarProps): JSX.Element {
   const [timer, setTimer] = useState(filmDuration * 60);
 
-
   useEffect(() => {
     if (isPlaying) {
-      setTimeout(setTimer, 1000, timer - 1);
+      setTimeout(setTimer, 10, timer - 0.01);
     }
   }, [isPlaying, timer]);
 
