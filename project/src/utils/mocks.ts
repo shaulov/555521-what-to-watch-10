@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { Film, Films} from '../types/film';
+import { Review, Reviews, UserReview } from '../types/review';
 
 export const createFakeFilm = (): Film => ({
   id: faker.datatype.number(),
@@ -22,3 +23,23 @@ export const createFakeFilm = (): Film => ({
 });
 
 export const createFakeFilms = (count: number): Films => Array.from({length: count}, () => createFakeFilm());
+
+
+export const createFakeReview = (): Review => ({
+  comment: faker.lorem.paragraph(),
+  date: faker.date.past().toString(),
+  id: faker.datatype.number(),
+  rating: faker.datatype.number({ min: 0, max: 10 }),
+  user: {
+    id: faker.datatype.number(),
+    name: faker.name.fullName(),
+  }
+});
+
+export const createFakeReviews = (): Reviews => Array.from({length: 5}, () => createFakeReview());
+
+export const createFakeUserReview = (): UserReview => ({
+  comment: faker.lorem.sentences(3),
+  rating: faker.datatype.number({ min: 0, max: 10 }),
+  filmId: faker.datatype.number(),
+});
