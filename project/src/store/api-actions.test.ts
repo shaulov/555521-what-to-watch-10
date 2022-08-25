@@ -216,21 +216,21 @@ describe('Async actions', () => {
 
     it('should dispatch post reviews with POST /comments/:id', async () => {
       const mockReview = createFakeReview();
-      const mockUserReview = createFakeUserReview();
+      const {comment, rating, filmId} = createFakeUserReview();
 
       mockAPI
-        .onPost('comments/1')
+        .onPost(`comments/${filmId}`, {comment, rating})
         .reply(200, mockReview);
 
       const store = mockStore();
 
-      await store.dispatch(postReviewAction(mockUserReview));
+      await store.dispatch(postReviewAction({comment, rating, filmId}));
 
       const actions = store.getActions().map(({type}) => type);
 
       expect(actions).toEqual([
-        fetchFilmReviewsAction.pending.type,
-        fetchFilmReviewsAction.fulfilled.type,
+        postReviewAction.pending.type,
+        postReviewAction.fulfilled.type,
       ]);
     });
   });
