@@ -13,10 +13,10 @@ function FilmReviews({filmReviews}: SingleReviewCardProps): JSX.Element {
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {reviews.slice(0, reviews.length / 2)}
+        {reviews.slice(0, reviews.length / 2 + 1)}
       </div>
       <div className="film-card__reviews-col">
-        { reviews.slice(reviews.length / 2, reviews.length) }
+        { reviews.slice(reviews.length / 2 + 1, reviews.length) }
       </div>
     </div>
   );
