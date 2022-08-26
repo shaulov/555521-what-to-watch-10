@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 type NavigationTabContentProps = {
   activeTab: string;
   onClickHandler: (value: string) => void;
-    titleTabs: string[];
+  titleTabs: string[];
 }
 
 function NavigationTabContent({activeTab, onClickHandler, titleTabs}: NavigationTabContentProps): JSX.Element {
