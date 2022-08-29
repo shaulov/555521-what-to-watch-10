@@ -26,7 +26,7 @@ export enum NameSpace {
   Data = 'DATA',
 }
 
-export const GENRES: readonly string[] = ['All genres', 'Comedies', 'Crime', 'Documentary', 'Drama', 'Horror', 'Kids & Family', 'Romance', 'Sci-Fi', 'Thriller'];
+export const GENRES: readonly string[] = ['All genres', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Horror', 'Adventure', 'Romance', 'Sci-Fi', 'Thriller'];
 
 export const DEFAULT_GENRE = 'All genres';
 
