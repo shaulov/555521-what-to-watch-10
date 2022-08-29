@@ -21,6 +21,7 @@ const store = mockStore({
     currentFilm: mockFilm,
     similarFilms: mockFilms,
     filmsByGenre: mockFilms,
+    promo: mockFilm,
     reviews: [],
     favoriteFilms: mockFilms,
     isFilmsDataLoaded: true,

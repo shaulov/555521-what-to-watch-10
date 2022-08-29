@@ -6,13 +6,13 @@ import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import MoreButton from '../../components/more-button/more-button';
 import { GENRES, FILMS_PER_STEP_COUNT, AuthorizationStatus } from '../../const';
-import { getFilms, getFilmsPerStep, getFilmsByGenre } from '../../store/film-data/selectors';
+import { getFilmsPerStep, getFilmsByGenre, getPromo } from '../../store/film-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { changeGenre, getFilmListByGenre, showMoreFilms } from '../../store/film-data/film-data';
-import { fetchFavoriteFilmsAction } from '../../store/api-actions';
+import { fetchFavoriteFilmsAction, fetchPromoAction } from '../../store/api-actions';
 
 function MainScreen (): JSX.Element {
-  const films = useAppSelector(getFilms);
+  const promo = useAppSelector(getPromo);
   const filmsPerStep = useAppSelector(getFilmsPerStep);
   const filmsByGenre = useAppSelector(getFilmsByGenre);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
@@ -20,6 +20,7 @@ function MainScreen (): JSX.Element {
 
   useEffect(() => {
     dispatch(getFilmListByGenre());
+    dispatch(fetchPromoAction());
     if (authorizationStatus === AuthorizationStatus.Auth) {
       dispatch(fetchFavoriteFilmsAction());
     }
@@ -37,7 +38,7 @@ function MainScreen (): JSX.Element {
 
   return (
     <>
-      <MainFilmCard film={films[0]}/>
+      <MainFilmCard film={promo}/>
 
       <div className="page-content">
 

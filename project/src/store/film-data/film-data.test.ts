@@ -10,6 +10,7 @@ const initialState = {
   currentFilm: {} as Film,
   similarFilms: [],
   filmsByGenre: [],
+  promo: {} as Film,
   reviews: [],
   favoriteFilms: [],
   isFilmsDataLoaded: false,

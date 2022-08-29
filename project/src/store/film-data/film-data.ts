@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { FilmData } from '../../types/state';
 import { Film } from '../../types/film';
-import { fetchFilmAction, fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchFavoriteFilmsAction, fetchFilmReviewsAction, changeFavoriteStatusAction, postReviewAction } from '../api-actions';
+import { fetchFilmAction, fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchFavoriteFilmsAction, fetchPromoAction, fetchFilmReviewsAction, changeFavoriteStatusAction, postReviewAction } from '../api-actions';
 import { DEFAULT_GENRE, FILMS_PER_STEP_COUNT } from '../../const';
 import { updateFilmList } from '../../utils/updateFilmList';
 
@@ -13,6 +13,7 @@ const initialState: FilmData = {
   currentFilm: {} as Film,
   similarFilms: [],
   filmsByGenre: [],
+  promo: {} as Film,
   reviews: [],
   favoriteFilms: [],
   isFilmsDataLoaded: false,
@@ -82,6 +83,16 @@ export const filmData = createSlice({
         }
         state.currentFilm = action.payload;
         state.films = updateFilmList(state.films, action.payload, true);
+      })
+      .addCase(fetchPromoAction.pending, (state) => {
+        state.isCurrentFilmDataLoaded = false;
+      })
+      .addCase(fetchPromoAction.fulfilled, (state, action) => {
+        state.promo = action.payload;
+        state.isCurrentFilmDataLoaded = true;
+      })
+      .addCase(fetchPromoAction.rejected, (state) => {
+        state.isCurrentFilmDataLoaded = true;
       })
       .addCase(fetchFilmReviewsAction.pending, (state) => {
         state.isCurrentFilmDataLoaded = false;

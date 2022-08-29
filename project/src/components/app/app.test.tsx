@@ -22,6 +22,7 @@ let store = mockStore({
     currentFilm: mockFilm,
     similarFilms: mockFilms,
     filmsByGenre: mockFilms,
+    promo: mockFilm,
     reviews: mockReviews,
     favoriteFilms: mockFilms,
     isFilmsDataLoaded: true,

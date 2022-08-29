@@ -15,6 +15,8 @@ export const getSimilarFilms = (state: State): Films => state[NameSpace.Data].si
 
 export const getFilmsByGenre = (state: State): Films => state[NameSpace.Data].filmsByGenre;
 
+export const getPromo = (state: State): Film => state[NameSpace.Data].promo;
+
 export const getReviews = (state: State): Reviews => state[NameSpace.Data].reviews;
 
 export const getFavoriteFilms = (state: State): Films => state[NameSpace.Data].favoriteFilms;
