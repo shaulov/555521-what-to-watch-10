@@ -26,6 +26,7 @@ function VideoPlayer({film}: VideoPlayerProps) : JSX.Element {
       ref={videoRef}
       muted
       loop
+      data-testid="video"
     />
   );
 }

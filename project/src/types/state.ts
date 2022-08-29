@@ -14,6 +14,7 @@ export type FilmData = {
   currentFilm: Film,
   similarFilms: Films,
   filmsByGenre: Films,
+  promo: Film,
   reviews: Reviews,
   favoriteFilms: Films,
   isFilmsDataLoaded: boolean,

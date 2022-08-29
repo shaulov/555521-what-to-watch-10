@@ -3,7 +3,7 @@ import thunk, { ThunkDispatch } from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createApi } from '../services/api';
-import { checkAuthAction, fetchFilmAction, fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchFavoriteFilmsAction, changeFavoriteStatusAction, fetchFilmReviewsAction, postReviewAction, loginAction, logoutAction } from './api-actions';
+import { checkAuthAction, fetchFilmAction, fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchFavoriteFilmsAction, changeFavoriteStatusAction, fetchPromoAction, fetchFilmReviewsAction, postReviewAction, loginAction, logoutAction } from './api-actions';
 import { APIRoute } from '../const';
 import { State } from '../types/state';
 import { AuthData } from '../types/auth-data';
@@ -192,6 +192,24 @@ describe('Async actions', () => {
       expect(actions).toEqual([
         changeFavoriteStatusAction.pending.type,
         changeFavoriteStatusAction.fulfilled.type,
+      ]);
+    });
+
+    it('should dispatch load promoFilm with GET /promo', async () => {
+      const mockFilms = createFakeFilms(3);
+      mockAPI
+        .onGet(APIRoute.Promo)
+        .reply(200, mockFilms);
+
+      const store = mockStore();
+
+      await store.dispatch(fetchPromoAction());
+
+      const actions = store.getActions().map(({type}) => type);
+
+      expect(actions).toEqual([
+        fetchPromoAction.pending.type,
+        fetchPromoAction.fulfilled.type,
       ]);
     });
 

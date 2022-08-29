@@ -53,6 +53,7 @@ function PlayerScreen (): JSX.Element {
         src={videoLink}
         className="player__video"
         poster={previewImage}
+        data-testid="video"
       >
       </video>
 
