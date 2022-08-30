@@ -38,7 +38,7 @@ describe('Component: PlayerControls', () => {
     render(
       <Provider store={store}>
         <HistoryRouter history={history}>
-          <PlayerControls handleControlsClick={fakeHandleControlsClick} handleFullScreenClick={fakeHandleFullScreenClick} isPlaying name={mockFilm.name}/>
+          <PlayerControls onControlsClick={fakeHandleControlsClick} onFullScreenClick={fakeHandleFullScreenClick} isPlaying name={mockFilm.name}/>
         </HistoryRouter>
       </Provider>
     );
