@@ -13,7 +13,7 @@ function LoginScreen (): JSX.Element {
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
 
-  const onSubmit = (authData: AuthData) => {
+  const handleFormSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
   };
 
@@ -21,7 +21,7 @@ function LoginScreen (): JSX.Element {
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
-      onSubmit({
+      handleFormSubmit({
         login: loginRef.current.value,
         password: passwordRef.current.value,
       });
