@@ -72,8 +72,8 @@ function PlayerScreen (): JSX.Element {
 
         <div className="player__controls-row">
           <PlayerControls
-            handleControlsClick={handleControlsClick}
-            handleFullScreenClick={handleFullScreenClick}
+            onControlsClick={handleControlsClick}
+            onFullScreenClick={handleFullScreenClick}
             isPlaying={isPlaying}
             name={name}
           />

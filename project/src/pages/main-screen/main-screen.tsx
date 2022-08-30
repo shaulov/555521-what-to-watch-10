@@ -26,12 +26,12 @@ function MainScreen (): JSX.Element {
     }
   }, []);
 
-  const onFilterChange = (genre: string) => {
+  const handleFilterChange = (genre: string) => {
     dispatch(changeGenre(genre));
     dispatch(getFilmListByGenre());
   };
 
-  const onShowMoreButtonClick = () => {
+  const handleShowMoreButtonClick = () => {
     const newFilmsPerStep = Math.min(filmsByGenre.length, filmsPerStep + FILMS_PER_STEP_COUNT);
     dispatch(showMoreFilms(newFilmsPerStep));
   };
@@ -45,11 +45,11 @@ function MainScreen (): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresList genres={GENRES} onFilterChange={onFilterChange} />
+          <GenresList genres={GENRES} onFilterChange={handleFilterChange} />
 
           <FilmsList films={filmsByGenre.slice(0, filmsPerStep)} />
 
-          {filmsPerStep < filmsByGenre.length && <MoreButton onShowMoreButtonClick={onShowMoreButtonClick} />}
+          {filmsPerStep < filmsByGenre.length && <MoreButton onShowMoreButtonClick={handleShowMoreButtonClick} />}
         </section>
 
         <footer className="page-footer">
