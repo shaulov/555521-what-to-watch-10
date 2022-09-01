@@ -24,7 +24,7 @@ function MainScreen (): JSX.Element {
     if (authorizationStatus === AuthorizationStatus.Auth) {
       dispatch(fetchFavoriteFilmsAction());
     }
-  }, []);
+  }, [authorizationStatus]);
 
   const handleFilterChange = (genre: string) => {
     dispatch(changeGenre(genre));

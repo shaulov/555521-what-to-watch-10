@@ -82,6 +82,7 @@ export const filmData = createSlice({
           state.favoriteFilms = updateFilmList(state.favoriteFilms, action.payload, false);
         }
         state.currentFilm = action.payload;
+        state.promo = action.payload;
         state.films = updateFilmList(state.films, action.payload, true);
       })
       .addCase(fetchPromoAction.pending, (state) => {
@@ -106,6 +107,9 @@ export const filmData = createSlice({
       })
       .addCase(postReviewAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
+      })
+      .addCase(postReviewAction.rejected, () => {
+        throw new Error('Something went wrong, please update page and try again');
       });
   }
 });

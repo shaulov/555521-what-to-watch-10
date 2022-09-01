@@ -8,7 +8,7 @@ import { store } from './store';
 import { fetchFilmAction, checkAuthAction } from './store/api-actions';
 import HistoryRouter from './components/history-route/history-route';
 import browserHistory from './browser-history';
-import ResetFilmList from './utils/resetFilmList';
+import ResetFilmList from './components/reset-film-list/reset-film-list';
 import ScrollToTop from './components/scroll-to-top/scroll-to-top';
 
 store.dispatch(fetchFilmAction());
