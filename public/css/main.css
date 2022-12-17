@@ -1559,4 +1559,12 @@ main {
     position: sticky;
     top: 33%;
   }
+
+  .page-header {
+    justify-content: center;
+}
+
+.page-header .logo {
+    margin-bottom: 20px;
+}
 }
